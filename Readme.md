@@ -9,6 +9,7 @@
 
 ## Overview
 Some text.
+![Candlestick system architecture](Candlestick.png)
 ### Tech
 
 ### requirements
