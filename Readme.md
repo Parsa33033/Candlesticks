@@ -86,7 +86,6 @@ Now you're ready to start...
 |     `description` | false | string  | the timestamp of the first quote within the minute |
 |     `type` | false | Type  | status of the instrument <br><br> can be ADD or DELETE indicating whether the instrument is added to the catalogue or deleted and not shown to users |
 |     `candlesticks` | true | List<Candlestick>  | List of all candlesticks |
-----
 
 ## Endpoints
 
@@ -96,13 +95,13 @@ Users can access candlestick-provider through the url and enpoints below:
 ### Candlestick-provider url:    
 `http://localhost:9000`
 
-
+---
 ### GET
 `get isin candlesticks` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
 `get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
 `get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
 
-
+---
 ### GET /candlesticks
 Gets a list of size at most 30 containing maximum 30 most recent candles sticks of an instrument with isin number provided as the parameter
 
@@ -130,7 +129,7 @@ List< Candlestick >
 // No value present
 []
 
-// a list of 30 or less last candlesticks
+// a list of 30 or less of the last candlesticks
 [
     {
         "openTimestamp": "2022-04-26T21:36:00.893051700Z",
@@ -159,6 +158,7 @@ List< Candlestick >
 ...    
 ]
 ```
+---
 ### GET /instruments/get-all-added
 Get all ADDED instruments
 
@@ -207,7 +207,7 @@ List< Instrument >
 ]
 ```
 
-
+---
 ### GET /instruments/get-all
 Get all ADDED instruments
 
