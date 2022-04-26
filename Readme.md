@@ -3,21 +3,19 @@
 ### Table of Contents
 
 1. [Overview](#Overview)
-2. [Used Tech](#Used Tech)
+2. [Used_Tech](#Used_Tech)
 3. [requirements](#Requirements)
-4. [How to run](#How to run)
+4. [How_to_run](#How_to_run)
 5. [Models](#Models)
 6. [Endpoints](#Endpoints)
 7. [My second title](#my-second-title)
 
 ## Overview
 
----
 Some text.
 ![Candlestick system architecture](candlestick.png)
-## Used Tech
+## Used_Tech
 
----
 
 The tech used for this API are:
 
@@ -30,7 +28,6 @@ The tech used for this API are:
 
 ## Requirements
 
----
 
 1) Java 11
 2) Docker
@@ -39,9 +36,8 @@ The tech used for this API are:
 These requirements should be installed on PATH
 
 
-## How to run
+## How_to_run
 
----
 For running the API, the steps below must be followed:
 
 1) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` to get the same result.
@@ -67,7 +63,6 @@ Now you're ready to start...
 
 ## Models
 
----
 
 **Candlestick**
 
@@ -95,19 +90,17 @@ Now you're ready to start...
 
 ## Endpoints
 
----
 
 Users can access candlestick-provider through the url and enpoints below:
 
 ### Candlestick-provider url:    
 `http://localhost:9000`
 
---- 
 
 ### GET
 `get isin candlesticks` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
 `get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instruments-get-all-added) <br/>
-___
+
 
 ### GET /candlesticks
 Gets a list of size at most 30 containing maximum 30 most recent candles sticks of an instrument with isin number provided as the parameter
