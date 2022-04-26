@@ -1,0 +1,47 @@
+version: '3'
+services:
+  java:
+    container_name: 'tr_candlesticks'
+    image: openjdk:11
+    volumes:
+      - ./:/app
+    command: bash -c "cd /app && java -jar partner-service-1.0.1-all.jar --port=8032"
+    ports:
+      - '8032:8032'
+  mongo:
+    image: 'mongo:latest'
+    container_name: 'mongo'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'admin'
+      MONGO_INITDB_ROOT_PASSWORD: 'password'
+    volumes:
+      - db_vol:/var/lib/mongo
+    networks:
+      - mongo
+  redis:
+    image: 'redis:5-alpine'
+    container_name: 'redis'
+    ports:
+      - '6379:6379'
+    networks:
+      - redis
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: 'rabbitmq'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - rabbitmq
+
+volumes:
+  db_vol:
+networks:
+  mongo:
+    driver: bridge
+  redis:
+    driver: bridge
+  rabbitmq:
+    driver: bridge

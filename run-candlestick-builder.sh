@@ -1,0 +1,1 @@
+java -jar ./candlestick-builder/target/candlestick-builder-0.0.1-SNAPSHOT.jar
