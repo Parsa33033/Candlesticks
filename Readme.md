@@ -99,7 +99,8 @@ Users can access candlestick-provider through the url and enpoints below:
 
 ### GET
 `get isin candlesticks` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
-`get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instruments-get-all-added) <br/>
+`get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
+`get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
 
 
 ### GET /candlesticks
@@ -117,7 +118,7 @@ List< Candlestick >
 
 ```
 
-// If instrument isin does not exist
+// If instrument isin does not exist with message "Instrument with id:{isin} does not exist!"
 {
     "timestamp": "2022-04-26T23:13:44.289+00:00",
     "status": 404,
@@ -157,39 +158,6 @@ List< Candlestick >
     },
 ...    
 ]
-
-[
-    {
-        "isin": "LJY205120718",
-        "description": "ancillae turpis semper sed",
-        "type": "ADD"
-    },
-    {
-        "isin": "GN8335463462",
-        "description": "imperdiet lectus dui vehicula animal",
-        "type": "ADD"
-    },
-    {
-        "isin": "DN7I2P211058",
-        "description": "maximus platea tale",
-        "type": "DELETE"
-    },
-    {
-        "isin": "MR44L3T03650",
-        "description": "veniam platea dicunt discere",
-        "type": "DELETE"
-    },
-    {
-        "isin": "OT1364645503",
-        "description": "deterruisset purus accommodare commune imperdiet voluptaria",
-        "type": "ADD"
-    },
-    {
-        "isin": "RM5375036800",
-        "description": "aliquet alia ludus fabulas definiebas gloriatur",
-        "type": "DELETE"
-    },
-]
 ```
 ### GET /instruments/get-all-added
 Get all ADDED instruments
@@ -202,6 +170,8 @@ None
 List< Instrument >
 
 ```
+
+// a list of ADDED instruments
 [
     {
         "isin": "LJY205120718",
@@ -233,9 +203,43 @@ List< Instrument >
         "description": "aliquet alia ludus fabulas definiebas gloriatur",
         "type": "DELETE"
     },
+    ...
 ]
 ```
 
+
+### GET /instruments/get-all
+Get all ADDED instruments
+
+**Parameters**
+None
+
+**Response**
+
+List< Instrument >
+
+```
+
+// a list of ADDED instruments
+[
+    {
+        "isin": "LJY205120718",
+        "description": "ancillae turpis semper sed",
+        "type": "ADD"
+    },
+    {
+        "isin": "GN8335463462",
+        "description": "imperdiet lectus dui vehicula animal",
+        "type": "ADD"
+    },
+    {
+        "isin": "OT1364645503",
+        "description": "deterruisset purus accommodare commune imperdiet voluptaria",
+        "type": "ADD"
+    },
+    ...
+]
+```
 
 
 
