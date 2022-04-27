@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Candlestick Controller
+ */
 @RestController
 public class CandlesticksController {
     private final static int LIMIT = 30;
@@ -36,8 +39,18 @@ public class CandlesticksController {
      * @return
      */
     @GetMapping("/candlesticks")
-    public List<CandlestickDTO> getCandleSticks(@RequestParam("isin") String isin) {
+    public List<CandlestickDTO> getCandlesticks(@RequestParam("isin") String isin) {
         return instrumentService.getByIsin(isin, LIMIT).getCandlesticks();
+    }
+
+    /**
+     * Get an instrument candlesticks list
+     * @param isin
+     * @return
+     */
+    @GetMapping("/candlesticks/get-all")
+    public List<CandlestickDTO> getAllCandlesticks(@RequestParam("isin") String isin) {
+        return instrumentService.getByIsin(isin, 0).getCandlesticks();
     }
 
 
