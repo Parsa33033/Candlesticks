@@ -1,5 +1,8 @@
 package com.tr.candlestickprovider.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.Instant;
 
 public class Candlestick {
