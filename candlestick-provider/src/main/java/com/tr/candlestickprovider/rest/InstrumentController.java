@@ -4,6 +4,7 @@ import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
 import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,6 +19,16 @@ public class InstrumentController {
 
     public InstrumentController(InstrumentHashServiceImpl instrumentService) {
         this.instrumentService = instrumentService;
+    }
+
+    /**
+     * Gets an instrument by its isin
+     * @param isin
+     * @return
+     */
+    @GetMapping("/instrument/{isin}")
+    public InstrumentDTO getInstrument(@PathVariable("isin") String isin) {
+        return this.instrumentService.getByIsin(isin, 0);
     }
 
     /**
