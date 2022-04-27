@@ -71,8 +71,8 @@ As it is evident in the picture there are two services working independently wit
 other through a messaging queue. The incoming streams of quotes and instruments info come through the websocket to the
 **Candlestick Provider Service**, and this service sends the data directly to the messaging queue with a specific route.
 
-1) If the message is an instance of Instrument, the route is `instrument.*.queue` and the message would be sent `instrument_queue`
-2) If the message is an instance of Quote, the route is `quote.*.queue` and the message would be sent `quote_queue`
+1) If the message is an instance of Instrument, the route is `instrument.*` and the message would be sent `instrument_queue`
+2) If the message is an instance of Quote, the route is `quote.*` and the message would be sent `quote_queue`
 
 Users can fetch the necessary info they require through this service.
 
@@ -184,10 +184,68 @@ Users can access candlestick-provider through the endpoints below:
 `get candlesticks by isin` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
 `get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
 `get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
+`get all added instruments` [http://localhost:9000/candlesticks/get-all?isin={isin}](#get-instrumentsget-all-added) <br/>
 
 ---
 ### GET /candlesticks
 Gets a list of size at most 30 containing maximum 30 most recent candles sticks of an instrument with isin number provided as the parameter
+
+**Parameters**
+
+|          Name | Required |  Type   | Description                                                                                                                                                           |
+| -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     `isin` | required | string  | the available (ADDED) instrument isin. |
+
+**Response**
+
+List< Candlestick >
+
+```
+
+// If instrument isin does not exist with message "Instrument with id:{isin} does not exist!"
+{
+    "timestamp": "2022-04-26T23:13:44.289+00:00",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Instrument with id:{isin} does not exist!",
+    "path": "/candlesticks"
+}
+
+// No value present
+[]
+
+// a list of 30 or less of the last candlesticks
+[
+    {
+        "openTimestamp": "2022-04-26T21:36:00.893051700Z",
+        "openPrice": 361.7534,
+        "highPrice": 388.7215,
+        "lowPrice": 354.2511,
+        "closingPrice": 388.7215,
+        "closeTimestamp": "2022-04-26T21:37:03.522518300Z"
+    },
+    {
+        "openTimestamp": "2022-04-26T21:35:04.917360200Z",
+        "openPrice": 333.2877,
+        "highPrice": 361.2557,
+        "lowPrice": 333.2877,
+        "closingPrice": 361.2557,
+        "closeTimestamp": "2022-04-26T21:36:00.893051700Z"
+    },
+    {
+        "openTimestamp": "2022-04-26T21:34:03.145736800Z",
+        "openPrice": 328.8082,
+        "highPrice": 338.2922,
+        "lowPrice": 323.3014,
+        "closingPrice": 330.79,
+        "closeTimestamp": "2022-04-26T21:35:04.917360200Z"
+    },
+...    
+]
+```
+---
+### GET /candlesticks/get-all
+Gets a list of all of the instrument's (with isin) candlesticks 
 
 **Parameters**
 

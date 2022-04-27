@@ -39,6 +39,14 @@ public class QuoteListenerService {
         this.instrumentService = instrumentService;
     }
 
+    /**
+     * Listens to the quote_queue and gets the payload
+     * converts the payload into a QuoteDTO object
+     * Updates the candlestick and if is done, add it to the instruments
+     * candlesticks list
+     * @param payload
+     * @throws JsonProcessingException
+     */
     @RabbitListener(queues = {RabbitConfig.QUOTE_QUEUE})
     public void instrumentListener(String payload) throws JsonProcessingException {
         QuoteDTO quoteDTO = objectMapper.readValue(payload, QuoteDTO.class);
@@ -46,6 +54,10 @@ public class QuoteListenerService {
         updateCandleStick(quoteDTO);
     }
 
+    /**
+     * Saves a new object of Candlestick
+     * @param quoteDTO
+     */
     public void saveCandlestick(QuoteDTO quoteDTO) {
         String isin = quoteDTO.getIsin();
         Instant quoteTimestamp = Instant.parse(quoteDTO.getTimestamp());
@@ -61,6 +73,10 @@ public class QuoteListenerService {
         candlestickService.save(candlestickDTO);
     }
 
+    /**
+     * Pushes the created Candlestick to the instrument's candlesticks list
+     * @param candlestickDTO
+     */
     public void pushToInstrumentList(CandlestickDTO candlestickDTO) {
         String isin = candlestickDTO.getIsin();
         if (instrumentService.hasInstrument(isin)) {
@@ -91,6 +107,12 @@ public class QuoteListenerService {
         }
     }
 
+    /**
+     * Updates the candlesticks if minute is not passed
+     * If minute is passed, the candlestick would be added
+     * to the instrument's candlesticks list
+     * @param quoteDTO
+     */
     public void updateCandleStick(QuoteDTO quoteDTO) {
         String isin = quoteDTO.getIsin();
         if (candlestickService.hasCandleStick(isin)) {
