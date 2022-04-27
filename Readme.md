@@ -180,8 +180,8 @@ Users can access candlestick-provider through the endpoints below:
 ---
 ### GET
 `get isin candlesticks` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
-`get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
 `get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
+`get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
 
 ---
 ### GET /candlesticks
@@ -241,7 +241,7 @@ List< Candlestick >
 ]
 ```
 ---
-### GET /instruments/get-all-added
+### GET /instruments/get-all
 Get all ADDED instruments
 
 **Parameters**
@@ -290,7 +290,7 @@ List< Instrument >
 ```
 
 ---
-### GET /instruments/get-all
+### GET /instruments/get-all-added
 Get all ADDED instruments
 
 **Parameters**
