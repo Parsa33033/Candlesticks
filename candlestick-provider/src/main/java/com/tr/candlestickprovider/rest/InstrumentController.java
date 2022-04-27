@@ -26,7 +26,7 @@ public class InstrumentController {
      * @param isin
      * @return
      */
-    @GetMapping("/instrument/{isin}")
+    @GetMapping("/instruments/{isin}")
     public InstrumentDTO getInstrument(@PathVariable("isin") String isin) {
         return this.instrumentService.getByIsin(isin, 0);
     }
