@@ -1,16 +1,9 @@
 package com.tr.candlestickprovider.rest;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tr.candlestickprovider.config.RabbitConfig;
 import com.tr.candlestickprovider.model.dto.CandlestickDTO;
-import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.service.CandlestickService;
 import com.tr.candlestickprovider.service.InstrumentService;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,10 +1,8 @@
 package com.tr.candlestickprovider.model.redis;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.model.enums.Type;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.redis.core.RedisHash;
 import java.util.List;
 

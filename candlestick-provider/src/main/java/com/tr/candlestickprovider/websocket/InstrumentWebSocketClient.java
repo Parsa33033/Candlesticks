@@ -3,7 +3,6 @@ package com.tr.candlestickprovider.websocket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.consts.URL;
 import com.tr.candlestickprovider.model.dto.InstrumentEventDTO;
 import com.tr.candlestickprovider.service.message.InstrumentSenderService;

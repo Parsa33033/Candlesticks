@@ -5,11 +5,7 @@ import com.tr.candlestickprovider.model.InstrumentDocument;
 import com.tr.candlestickprovider.model.dto.CandlestickDTO;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.mapper.CandlestickDocumentMapper;
-import com.tr.candlestickprovider.model.mapper.CandlestickMapper;
 import com.tr.candlestickprovider.model.mapper.InstrumentDocumentMapper;
-import com.tr.candlestickprovider.model.mapper.InstrumentMapper;
-import com.tr.candlestickprovider.model.redis.Candlestick;
-import com.tr.candlestickprovider.model.redis.Instrument;
 import com.tr.candlestickprovider.repository.InstrumentDocumentRepository;
 import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,6 +19,7 @@ import java.util.stream.StreamSupport;
 public class InstrumentDocumentService {
 
     private final InstrumentDocumentRepository instrumentDocumentRepository;
+
     private final InstrumentDocumentMapper instrumentDocumentMapper;
 
     private final CandlestickDocumentMapper candlestickDocumentMapper;
