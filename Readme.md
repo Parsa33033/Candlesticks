@@ -8,7 +8,7 @@
    - [Non_Functional_Requirements](#Non_Functional_Requirements)
    - [Architecture](#Architecture)
 2. [Used_Tech](#Used_Tech)
-3. [requirements](#Requirements)
+3. [Requirements](#Requirements)
 4. [How_to_run](#How_to_run)
 5. [Models](#Models)
 6. [Endpoints](#Endpoints)
