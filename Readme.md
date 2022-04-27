@@ -115,7 +115,7 @@ The tech used for this API are:
 2) Docker
 3) Maven
 
-These requirements should be installed on PATH
+These requirements should be installed on PATH (environment variables)
 
 
 ## How_to_run
@@ -124,20 +124,26 @@ Note: For facilitating manual running, docker-compose containers for the candles
 
 For running the API, the steps below must be followed:
 
-1) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` to get the same result.
+1) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` on the project's path to get the same result.
    ```
    Project_Folder_Path> docker.sh
    ```
    Wait until all dependencies are up and running.
    
 
-2) Run `run-candlestick-provider.sh` to start the candlestick-provider service
+2) To build the jar file for both services (`candlestick-provider` and `candlestick-builder`) run the command bellow on the project's path:
+
+   ```
+   Project_Folder_Path> build.sh
+   ```
+
+2) After the build is finished, run `run-candlestick-provider.sh` to start the candlestick-provider service
    ```
    Project_Folder_Path> run-candlestick-provider.sh
    ```
 
 
-3) Run `run-candlestick-builder.sh` to start the candlestick-builder service
+3) After the build is finished, run `run-candlestick-builder.sh` to start the candlestick-builder service
    ```
    Project_Folder_Path> run-candlestick-builder.sh
    ```
