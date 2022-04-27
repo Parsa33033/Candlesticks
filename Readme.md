@@ -3,17 +3,100 @@
 ### Table of Contents
 
 1. [Overview](#Overview)
+   - [Functionalities](#Functionalities)
+   - [Scale](#Scale)
+   - [Non_Functional_Requirements](#Non_Functional_Requirements)
+   - [Architecture](#Architecture)
 2. [Used_Tech](#Used_Tech)
 3. [requirements](#Requirements)
 4. [How_to_run](#How_to_run)
 5. [Models](#Models)
 6. [Endpoints](#Endpoints)
-7. [My second title](#my-second-title)
 
 ## Overview
 
-Some text.
-![Candlestick system architecture](candlestick.png)
+Candlestick API receives live quotes from a partner websocket API and creates 1minute candlesticks for which users are able to
+view the history of for the last 30 minutes (or the last 30 recent candlesticks). Therefore, by being able to get
+all the available (ADDED) instruments, users can decide to fetch the required isin (instrument's id) in order to get the 
+list of the last 30 candlesticks. However, there are challenges to designing a system that receives a huge amount of 
+quotes from different instruments and has to create candlesticks from the received quotes. Therefore, there are functionalities
+required for such a system.
+
+### Functionalities
+1) The system opens a websocket to partner API
+2) The system receives stream of quotes from the partner API
+3) The quotes for a specific instrument in a specific minute should be amassed as a single candlestick
+4) The created candlestick should be appended to the list of candlesticks for the instrument
+5) Users should be able to get the list of the instruments
+6) Users can get an instrument's candlesticks list by the instrument's isin
+
+### Scale
+1. Assume there are N instruments
+2. Each instrument creates a candlestick for each minute of the day
+3. Assume each instrument stays in the catalogue for H hours 
+4. Therefore, there would be N * H * 60 (60 min per hour) candlesticks
+
+Example: 
+
+N = 1000, H = 24 => 1440000/day => 525M candlesticks/year
+
+N = 100000, H = 100 => 600000000/day => 219G candlesticks/year
+
+### Non_Functional_Requirements
+1) Reliability
+   - A system is not really needed to be reliable in terms of being 100 percent accurate about there might be distortion in the data received from 
+   the partner API
+2) Performance
+   - Since the document are mostly fetched and saved and no intricate query is needed, a NoSQL database would be a good choice
+   - A system with such throughput needs to process in cache in order to be fast. So Redis is used to increase the performance
+   - Data will be fetched from the cache (Redis) and if not available it will be fetched from NoSQL database (MongoDB) and given to 
+     the cache and then provided to the user
+   - It is integral for the candlestick building to not take place on the same process (or even machine) while the system is receiving
+     streams of data. **Therefore two completely independent services have to work with each other through a messaging queue (RabbitMQ)**  
+   - Since the trading is normally local, no CDN is needed
+3) Maintainable
+   - Having two different independent services helps with maintainability
+4) Scalability
+   - The Scale of the saved data is not considerable and there would be no need for distribution as long as a NoSQL database is used
+
+
+
+### Architecture
+
+![Candlestick system architecture](candlestick.png)'
+
+#### Candlestick Provider Service
+
+As it is evident in the picture there are two services working independently with each
+other through a messaging queue. The incoming streams of quotes and instruments info come through the websocket to the
+**Candlestick Provider Service**, and this service sends the data directly to the messaging queue with a specific route.
+
+1) If the message is an instance of Instrument, the route is `instrument.*.queue` and the message would be sent `instrument_queue`
+2) If the message is an instance of Quote, the route is `quote.*.queue` and the message would be sent `quote_queue`
+
+Users can fetch the necessary info they require through this service.
+
+
+#### Candlestick Builder Service
+
+This service is responsible to creat the candlesticks by listening to the messaging queues and create the associated 
+candlesticks from the quotes. It also updates the instrument status (Type) from between ADD and DELETE.
+
+**Process**
+
+Instruments
+
+1) Listen for instruments coming from the `instrument_queue`
+2) Get the Incoming instruments and update the cache and NoSQL database
+   
+Quotes
+
+1) Listen for quotes coming from the `quote_queue`
+2) Create a temporary Candlestick object in the cache for a specific minute
+3) Update the temporary cache values as quotes for that specific minute come as a stream
+4) if minute increased, add the temporary candlestick to the list of candlesticks for that specific instrument
+5) create a new temporary Candlestick object for the 'new' minute
+
 ## Used_Tech
 
 
@@ -44,7 +127,7 @@ For running the API, the steps below must be followed:
    ```
    Project_Folder_Path> docker.sh
    ```
-   Wait until all dependencies on [Used Tech](#Used Tech) are up and running.
+   Wait until all dependencies are up and running.
    
 
 2) Run `run-candlestick-provider.sh` to start the candlestick-provider service
@@ -90,7 +173,7 @@ Now you're ready to start...
 ## Endpoints
 
 
-Users can access candlestick-provider through the url and enpoints below:
+Users can access candlestick-provider through the endpoints below:
 
 ### Candlestick-provider url:    
 `http://localhost:9000`
