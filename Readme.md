@@ -137,13 +137,13 @@ For running the API, the steps below must be followed:
    Project_Folder_Path> build.sh
    ```
 
-2) After the build is finished, run `run-candlestick-provider.sh` to start the candlestick-provider service
+3) After the build is finished, run `run-candlestick-provider.sh` to start the candlestick-provider service
    ```
    Project_Folder_Path> run-candlestick-provider.sh
    ```
 
 
-3) After the build is finished, run `run-candlestick-builder.sh` to start the candlestick-builder service
+4) After the build is finished, run `run-candlestick-builder.sh` to start the candlestick-builder service
    ```
    Project_Folder_Path> run-candlestick-builder.sh
    ```
