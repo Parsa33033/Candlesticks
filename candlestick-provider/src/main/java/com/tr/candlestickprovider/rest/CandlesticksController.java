@@ -1,8 +1,7 @@
 package com.tr.candlestickprovider.rest;
 
 import com.tr.candlestickprovider.model.dto.CandlestickDTO;
-import com.tr.candlestickprovider.service.CandlestickService;
-import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +14,9 @@ import java.util.List;
 @RestController
 public class CandlesticksController {
     private final static int LIMIT = 30;
-    private final CandlestickService candlestickService;
-    private final InstrumentService instrumentService;
+    private final InstrumentHashServiceImpl instrumentService;
 
-    public CandlesticksController(CandlestickService candlestickService,
-                                  InstrumentService instrumentService) {
-        this.candlestickService = candlestickService;
+    public CandlesticksController(InstrumentHashServiceImpl instrumentService) {
         this.instrumentService = instrumentService;
     }
 

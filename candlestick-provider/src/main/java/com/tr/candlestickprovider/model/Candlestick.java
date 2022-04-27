@@ -1,16 +1,8 @@
 package com.tr.candlestickprovider.model;
 
-import com.tr.candlestickprovider.consts.Constant;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.Instant;
 
-@Document(Constant.CANDLESTICK)
-public class CandlestickDocument {
-
-    @Id
-    private String isin;
+public class Candlestick {
 
     Instant openTimestamp;
 
@@ -25,14 +17,6 @@ public class CandlestickDocument {
     double closingPrice;
 
     Instant closeTimestamp;
-
-    public String getIsin() {
-        return isin;
-    }
-
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
 
     public Instant getOpenTimestamp() {
         return openTimestamp;
@@ -93,8 +77,7 @@ public class CandlestickDocument {
     @Override
     public String toString() {
         return "Candlestick{" +
-                "isin='" + isin + '\'' +
-                ", openTimestamp=" + openTimestamp +
+                "openTimestamp=" + openTimestamp +
                 ", currentTimestamp=" + currentTimestamp +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +

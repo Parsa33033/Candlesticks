@@ -1,6 +1,6 @@
 package com.tr.candlestickprovider.model.mapper;
 
-import com.tr.candlestickprovider.model.InstrumentDocument;
+import com.tr.candlestickprovider.model.mongodb.InstrumentDocument;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import org.mapstruct.Mapper;
 

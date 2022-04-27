@@ -1,0 +1,16 @@
+[
+  {
+    "type": "ADD",
+    "data": {
+      "isin": "123456",
+      "description": "test"
+    }
+  },
+  {
+    "type": "DELETE",
+    "data": {
+      "isin": "123456",
+      "description": "test"
+    }
+  }
+]

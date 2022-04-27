@@ -1,94 +1,24 @@
 package com.tr.candlestickprovider.service;
 
-import com.tr.candlestickprovider.model.dto.CandlestickDTO;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
-import com.tr.candlestickprovider.model.mapper.CandlestickMapper;
-import com.tr.candlestickprovider.model.mapper.InstrumentMapper;
-import com.tr.candlestickprovider.model.redis.Candlestick;
-import com.tr.candlestickprovider.model.redis.Instrument;
-import com.tr.candlestickprovider.repository.InstrumentRepository;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-@Service
-public class InstrumentService {
+public interface InstrumentService {
 
-    private final InstrumentRepository instrumentRepository;
+    boolean hasInstrument(String isin);
 
-    private final InstrumentMapper instrumentMapper;
+    InstrumentDTO getByIsin(String isin, int candlesticksLimit);
 
-    private final InstrumentDocumentService instrumentDocumentService;
+    List<InstrumentDTO> getAll();
 
-    private final CandlestickMapper candlestickMapper;
+    List<InstrumentDTO> getAllByType(Type type);
 
-    public InstrumentService(InstrumentRepository instrumentRepository,
-                             InstrumentMapper instrumentMapper,
-                             InstrumentDocumentService instrumentDocumentService,
-                             CandlestickMapper candlestickMapper) {
-        this.instrumentRepository = instrumentRepository;
-        this.instrumentMapper = instrumentMapper;
-        this.instrumentDocumentService = instrumentDocumentService;
-        this.candlestickMapper = candlestickMapper;
-    }
+    InstrumentDTO save(InstrumentDTO instrumentDTO);
 
-    public InstrumentDTO getByIsin(String isin, int limit) {
-        Optional<Instrument> instrumentOptional = this.instrumentRepository.findById(isin);
-        if (instrumentOptional.isPresent()) {
-            Instrument instrument = instrumentOptional.get();
-            List<CandlestickDTO> candlestickDTOS =
-                    candlestickMapper.toDtos(instrument.getCandlesticks());
-            if (candlestickDTOS == null)
-                candlestickDTOS = new ArrayList<>();
-            if (!candlestickDTOS.isEmpty() && limit > 0 && limit <= candlestickDTOS.size())
-                candlestickDTOS = candlestickDTOS.stream().limit(limit).collect(Collectors.toList());
-            InstrumentDTO instrumentDTO = instrumentMapper.toDto(instrument);
-            instrumentDTO.setCandlesticks(candlestickDTOS);
-            return instrumentDTO;
-        } else {
-            InstrumentDTO instrumentDTO = this.instrumentDocumentService.getByIsin(isin);
-            List<CandlestickDTO> candlestickDTOS = instrumentDTO.getCandlesticks();
-            if (candlestickDTOS == null)
-                candlestickDTOS = new ArrayList<>();
-            if (!candlestickDTOS.isEmpty() && limit > 0 && limit <= candlestickDTOS.size()) {
-                candlestickDTOS = candlestickDTOS.stream().limit(limit).collect(Collectors.toList());
-                instrumentDTO.setCandlesticks(candlestickDTOS);
-            }
-            instrumentRepository.save(instrumentMapper.toEntity(instrumentDTO));
-            return instrumentDTO;
-        }
-    }
+    void saveAll(List<InstrumentDTO> instrumentDTOS);
 
-    public List<InstrumentDTO> getAll() {
-        return StreamSupport.stream(instrumentRepository.findAll().spliterator(), false)
-                .map(instrumentMapper::toDto).collect(Collectors.toList());
-    }
+    void deleteByIsin(String isin);
 
-    public List<InstrumentDTO> getAllAdded() {
-        return StreamSupport.stream(instrumentRepository.findAll().spliterator(), false)
-                .filter(instrument -> instrument.getType() == Type.ADD)
-                .map(instrumentMapper::toDto).collect(Collectors.toList());
-    }
-
-    public long getCount() {
-        return instrumentRepository.findAll().spliterator().getExactSizeIfKnown();
-    }
-
-    public InstrumentDTO save(InstrumentDTO instrumentDTO) {
-        Instrument instrument = instrumentMapper.toEntity(instrumentDTO);
-        List<Candlestick> candlesticks = candlestickMapper.toEntities(instrumentDTO.getCandlesticks());
-        instrument.setCandlesticks(candlesticks);
-        instrument = this.instrumentRepository.save(instrument);
-        this.instrumentDocumentService.save(instrumentDTO);
-        return instrumentMapper.toDto(instrument);
-    }
-
-    public void removeById(String isin) {
-        this.instrumentRepository.deleteById(isin);
-    }
 }
