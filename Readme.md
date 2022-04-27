@@ -120,6 +120,8 @@ These requirements should be installed on PATH
 
 ## How_to_run
 
+Note: For facilitating manual running, docker-compose containers for the candlestick-provider and candlestick-builder services are not used 
+
 For running the API, the steps below must be followed:
 
 1) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` to get the same result.
