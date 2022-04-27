@@ -84,5 +84,4 @@ public class QuoteWebSocketClient implements WebSocket.Listener{
         logger.error("Opened {} Websocket endpoint with protocol: {}", URL.QUOTES_ENDPOINT, webSocket.getSubprotocol());
         WebSocket.Listener.super.onOpen(webSocket);
     }
-
 }

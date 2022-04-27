@@ -1,12 +1,9 @@
 package com.tr.candlestickprovider.websocket;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tr.candlestickprovider.consts.URL;
 import com.tr.candlestickprovider.model.dto.InstrumentEventDTO;
 import com.tr.candlestickprovider.service.message.InstrumentSenderService;
-import com.tr.candlestickprovider.service.message.QuoteSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

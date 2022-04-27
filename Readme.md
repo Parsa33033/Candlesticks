@@ -189,7 +189,8 @@ Users can access candlestick-provider through the endpoints below:
 ### GET
 `get 30 candlesticks by isin` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
 `get all candlesticks by isin` [http://localhost:9000/candlesticks/get-all?isin={isin}](#get-candlesticksget-all) <br/>
-`get all instrument` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
+`get an instrument by isin` [http://localhost:9000/instruments/get-all](#getinstrumentsisin) <br/>
+`get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
 `get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
 
 ---
@@ -307,8 +308,39 @@ List< Candlestick >
 ]
 ```
 ---
+### GET /instruments/{isin}
+Gets an instrument by isin
+
+**Parameters**
+None
+
+**Response**
+
+Instrument
+
+```
+
+// The returned instrument
+{
+   "isin": "LJY205120718",
+   "description": "ancillae turpis semper sed",
+   "type": "ADD"
+}
+
+ 
+// If instrument isin does not exist with message "Instrument with id:{isin} does not exist!"
+{
+    "timestamp": "2022-04-26T23:13:44.289+00:00",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Instrument with id:{isin} does not exist!",
+    "path": "/candlesticks"
+}
+```
+
+---
 ### GET /instruments/get-all
-Get all ADDED instruments
+Gets all ADDED instruments
 
 **Parameters**
 None
@@ -357,7 +389,7 @@ List< Instrument >
 
 ---
 ### GET /instruments/get-all-added
-Get all ADDED instruments
+Gets all ADDED instruments
 
 **Parameters**
 None
