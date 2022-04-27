@@ -189,7 +189,7 @@ Users can access candlestick-provider through the endpoints below:
 ### GET
 `get 30 candlesticks by isin` [http://localhost:9000/candlesticks?isin={isin}](#get-candlesticks) <br/>
 `get all candlesticks by isin` [http://localhost:9000/candlesticks/get-all?isin={isin}](#get-candlesticksget-all) <br/>
-`get an instrument by isin` [http://localhost:9000/instruments/{isin}](#getinstruments-isin) <br/>
+`get an instrument by isin` [http://localhost:9000/instruments/{isin}](#getinstruments) <br/>
 `get all instruments` [http://localhost:9000/instruments/get-all](#get-instrumentsget-all) <br/>
 `get all added instruments` [http://localhost:9000/instruments/get-all-added](#get-instrumentsget-all-added) <br/>
 
