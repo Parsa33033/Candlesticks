@@ -29,18 +29,15 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
 
     private final ObjectMapper objectMapper;
     private final InstrumentSenderService instrumentSenderService;
-    private final QuoteSenderService quoteSenderService;
 
     @Value("${application.partner-url}")
     private String url;
 
 
     public InstrumentWebSocketClient(ObjectMapper objectMapper,
-                                     InstrumentSenderService instrumentSenderService,
-                                     QuoteSenderService quoteSenderService) {
+                                     InstrumentSenderService instrumentSenderService) {
         this.objectMapper = objectMapper;
         this.instrumentSenderService = instrumentSenderService;
-        this.quoteSenderService = quoteSenderService;
     }
 
     /**
@@ -62,7 +59,7 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
                     objectMapper.readValue(data.toString(), InstrumentEventDTO.class);
             logger.info("Instrument: ===> {}", instrumentEventDTO);
             instrumentSenderService.send(instrumentEventDTO);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             logger.warn(e.getMessage());
         }
         return WebSocket.Listener.super.onText(webSocket, data, last);

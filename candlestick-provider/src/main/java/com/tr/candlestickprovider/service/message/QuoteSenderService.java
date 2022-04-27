@@ -6,7 +6,7 @@ import com.tr.candlestickprovider.config.RabbitConfig;
 import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.consts.RabbitRouteBuilder;
 import com.tr.candlestickprovider.model.dto.*;
-import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.TopicExchange;
@@ -25,7 +25,7 @@ public class QuoteSenderService {
     Logger logger = LoggerFactory.getLogger(QuoteSenderService.class);
     private final RabbitTemplate rabbitTemplate;
 
-    private final InstrumentService instrumentService;
+    private final InstrumentHashServiceImpl instrumentService;
 
     private final ObjectMapper objectMapper;
 
@@ -34,7 +34,7 @@ public class QuoteSenderService {
     private final static Random rand = new Random();
 
     public QuoteSenderService(RabbitTemplate rabbitTemplate,
-                              InstrumentService instrumentService,
+                              InstrumentHashServiceImpl instrumentService,
                               ObjectMapper objectMapper,
                               @Qualifier("quoteExchange") TopicExchange topicExchange) {
         this.rabbitTemplate = rabbitTemplate;

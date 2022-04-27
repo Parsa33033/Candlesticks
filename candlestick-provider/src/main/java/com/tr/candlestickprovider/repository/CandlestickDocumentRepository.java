@@ -1,6 +1,6 @@
 package com.tr.candlestickprovider.repository;
 
-import com.tr.candlestickprovider.model.CandlestickDocument;
+import com.tr.candlestickprovider.model.mongodb.CandlestickDocument;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

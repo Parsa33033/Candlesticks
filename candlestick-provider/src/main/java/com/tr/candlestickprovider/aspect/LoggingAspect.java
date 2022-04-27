@@ -22,7 +22,8 @@ public class LoggingAspect {
             "within(@org.springframework.stereotype.Controller *)")
     public void beanPointcut() {}
 
-    @Pointcut("within(com.tr.candlestickprovider.rest..*)")
+    @Pointcut("within(com.tr.candlestickprovider.rest..*) ||" +
+            "within(com.tr.candlestickprovider.service.impl..*)")
     public void packagePointcut() {}
 
     @Around("beanPointcut() && packagePointcut()")
