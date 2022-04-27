@@ -15,7 +15,7 @@
 
 ## Overview
 
-Candlestick API receives live quotes from a partner websocket API and creates 1minute candlesticks for which users are able to
+Candlestick API receives live quotes and instrument info from a partner websocket API and creates 1minute candlesticks for which users are able to
 view the history of for the last 30 minutes (or the last 30 recent candlesticks). Therefore, by being able to get
 all the available (ADDED) instruments, users can decide to fetch the required isin (instrument's id) in order to get the 
 list of the last 30 candlesticks. However, there are challenges to designing a system that receives a huge amount of 
@@ -82,7 +82,6 @@ Users can fetch the necessary info they require through this service.
 This service is responsible to creat the candlesticks by listening to the messaging queues and create the associated 
 candlesticks from the quotes. It also updates the instrument status (Type) from between ADD and DELETE.
 
-**Process**
 
 Instruments
 
