@@ -7,7 +7,6 @@ import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,28 +56,49 @@ public class RabbitConfig {
                 .with((RabbitRouteBuilder.from(Constant.INSTRUMENT).toAnywhere().build()));
     }
 
+    /**
+     * create quote_queue
+     * @return
+     */
     @Bean
     public Queue quoteQueue() {
         return QueueBuilder.durable(QUOTE_QUEUE).build();
     }
 
+    /**
+     * bind quote_queue to quote_exchange with route quote.*
+     * @return
+     */
     @Bean
     public Binding quoteBinding() {
         return BindingBuilder.bind(quoteQueue()).to(quoteExchange())
                 .with(RabbitRouteBuilder.from(Constant.QUOTE).toAnywhere().build());
     }
 
+    /**
+     * create instrument_queue
+     * @return
+     */
     @Bean
     public Queue instruemntQueue() {
         return QueueBuilder.durable(INSTRUMENT_QUEUE).build();
     }
 
+    /**
+     * bind instrument_queue to instrument_exchange
+     * @return
+     */
     @Bean
     public Binding instrumentBinding() {
         return BindingBuilder.bind(instruemntQueue()).to(instrumentExchange())
                 .with(RabbitRouteBuilder.from(Constant.INSTRUMENT).toAnywhere().build());
     }
 
+    /**
+     * create the bean for RabbitTemplate instance and connection
+     * @param connectionFactory
+     * @return
+     */
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
