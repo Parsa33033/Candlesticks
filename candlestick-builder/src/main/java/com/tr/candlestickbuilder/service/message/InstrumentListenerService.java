@@ -34,6 +34,12 @@ public class InstrumentListenerService {
         this.instrumentDocumentService = instrumentDocumentService;
     }
 
+    /**
+     * Gets the payload from instrument_queue
+     * converts the payload to InstrumentEventDTO
+     * saves the Instrument
+     * @param payload
+     */
     @RabbitListener(queues = {RabbitConfig.INSTRUMENT_QUEUE})
     public void instrumentListener(String payload) {
         try {
@@ -50,6 +56,11 @@ public class InstrumentListenerService {
 
     }
 
+    /**
+     * Saves the instrument or updates the description and type
+     * based on whether the object is in cache
+     * @param instrumentEventDTO
+     */
     public void saveInstrument(InstrumentEventDTO instrumentEventDTO) {
         Type type = instrumentEventDTO.getType();
         InstrumentDTO instrumentDTO = instrumentEventDTO.getInstrumentDTO();

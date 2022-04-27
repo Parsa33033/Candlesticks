@@ -4,20 +4,11 @@ import com.tr.candlestickbuilder.consts.Constant;
 import com.tr.candlestickbuilder.consts.RabbitRouteBuilder;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
-
-import javax.annotation.PostConstruct;
 
 @Configuration
 @EnableRabbit
@@ -63,22 +54,38 @@ public class RabbitConfig {
                 .with((RabbitRouteBuilder.from(Constant.INSTRUMENT).toAnywhere().toAnywhere().build()));
     }
 
+    /**
+     * Create quote_queue
+     * @return
+     */
     @Bean
     public Queue quoteQueue() {
         return QueueBuilder.durable(QUOTE_QUEUE).build();
     }
 
+    /**
+     * Bind quote_queue to quote_exchange
+     * @return
+     */
     @Bean
     public Binding quoteBinding() {
         return BindingBuilder.bind(quoteQueue()).to(quoteExchange())
                 .with(RabbitRouteBuilder.from(Constant.QUOTE).toAnywhere().build());
     }
 
+    /**
+     * Create instrument_queue
+     * @return
+     */
     @Bean
     public Queue instruemntQueue() {
         return QueueBuilder.durable(INSTRUMENT_QUEUE).build();
     }
 
+    /**
+     * Bind instrument_queue to instrument_exchange
+     * @return
+     */
     @Bean
     public Binding instrumentBinding() {
         return BindingBuilder.bind(instruemntQueue()).to(instrumentExchange())
