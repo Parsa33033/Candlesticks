@@ -12,6 +12,7 @@
 4. [How_to_run](#How_to_run)
 5. [Models](#Models)
 6. [Endpoints](#Endpoints)
+7. [RabbitMQ](#RabbitMQ)
 
 ## Overview
 
@@ -184,6 +185,18 @@ Users can access candlestick-provider through the endpoints below:
 
 ### Candlestick-provider url:    
 `http://localhost:9000`
+
+To test the endpoints, you have two options
+
+
+#### Option 1: Use Swagger
+
+You can have a UI for api checking by entering the address below in your browser:
+
+`http://localhost:9000/swagger-ui.html`
+
+
+#### Option 2: Use Curl, Postman, or any API testing software
 
 ---
 ### GET
@@ -423,3 +436,15 @@ List< Instrument >
 
 
 
+## RabbitMQ
+
+you can use the RabbitMQ management system from the url below:
+
+`http://localhost:15672/`
+
+Username: guest
+Password: guest
+
+
+If you need to change the username and password, you can do it by editing the docker-compose.yml file and 
+changing the affiliated `application-prod.yml` file in `\candlestick-provider\src\main\resources` and  `\candlestick-builder\src\main\resources`

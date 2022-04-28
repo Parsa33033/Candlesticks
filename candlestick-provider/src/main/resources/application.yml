@@ -4,9 +4,6 @@ spring:
 server:
   error:
     include-message: always
-springdoc:
-  swagger-ui:
-    persist-authorization: true
 
 candlestick:
   partner:

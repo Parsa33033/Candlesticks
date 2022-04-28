@@ -13,6 +13,8 @@ public class InstrumentDTO {
 
     private Type type;
 
+    private String timestamp;
+
     @JsonIgnore
     private List<CandlestickDTO> candlesticks;
 
@@ -52,11 +54,22 @@ public class InstrumentDTO {
         this.candlesticks = candlesticks;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return "InstrumentDTO{" +
                 "isin='" + isin + '\'' +
                 ", description='" + description + '\'' +
+                ", type=" + type +
+                ", timestamp='" + timestamp + '\'' +
+                ", candlesticks=" + candlesticks +
                 '}';
     }
 }

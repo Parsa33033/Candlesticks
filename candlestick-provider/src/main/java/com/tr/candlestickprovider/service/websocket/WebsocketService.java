@@ -17,13 +17,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class WebsocketService {
 
-    private final String url;
-
-    public WebsocketService (CandlestickConfig candlestickConfig) {
-        url = candlestickConfig.getPartner().getUrl();
-    }
-
-    public void connect(String endpoint, WebSocket.Listener listener) throws WebSocketNotConnectedException {
+    public void connect(String url, String endpoint, WebSocket.Listener listener) throws WebSocketNotConnectedException {
         try {
             CompletableFuture<WebSocket> webSocket = HttpClient
                     .newHttpClient()
