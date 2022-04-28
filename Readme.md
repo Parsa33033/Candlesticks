@@ -112,8 +112,8 @@ The tech used for this API are:
 
 
 1) Java 11
-2) Docker
-3) Maven
+2) Docker (tested on 20.10.13)
+3) Maven (tested on 3.6.3)
 
 These requirements should be installed on PATH (environment variables)
 

@@ -1,8 +1,6 @@
 server:
   port: 9000
 
-application:
-  partner-url: "ws://localhost:8032"
 
 spring:
   rabbitmq:
@@ -28,3 +26,4 @@ logging:
     name: logs.log
   level:
     com.tr.candlestickbuilder: debug
+

@@ -2,7 +2,9 @@ package com.tr.candlestickprovider.rest;
 
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
+import com.tr.candlestickprovider.service.InstrumentService;
 import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
+import com.tr.candlestickprovider.service.impl.InstrumentServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +17,9 @@ import java.util.List;
 @RestController
 public class InstrumentController {
 
-    private final InstrumentHashServiceImpl instrumentService;
+    private final InstrumentService instrumentService;
 
-    public InstrumentController(InstrumentHashServiceImpl instrumentService) {
+    public InstrumentController(InstrumentService instrumentService) {
         this.instrumentService = instrumentService;
     }
 

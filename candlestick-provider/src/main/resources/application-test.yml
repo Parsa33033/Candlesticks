@@ -27,3 +27,4 @@ logging:
     name: logs.log
   level:
     com.tr.candlestickprovider: debug
+
