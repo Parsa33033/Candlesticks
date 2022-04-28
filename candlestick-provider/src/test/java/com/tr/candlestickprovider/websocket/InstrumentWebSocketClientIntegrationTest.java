@@ -71,6 +71,6 @@ class InstrumentWebSocketClientIntegrationTest {
                 () -> instrumentWebSocketClient.onText(websocket, "", false));
         ObjectMapper objectMapper = new ObjectMapper();
         String data = objectMapper.writeValueAsString(instrumentEventDTO);
-        assertThrows(PartnerEventSendToQueueException.class, () -> instrumentWebSocketClient.onText(websocket, data, false));
+        assertDoesNotThrow(() -> instrumentWebSocketClient.onText(websocket, data, false));
     }
 }

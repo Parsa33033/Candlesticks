@@ -69,6 +69,6 @@ class QuoteWebSocketClientIntegrationTest {
                 () -> quoteWebSocketClient.onText(websocket, "", false));
         ObjectMapper objectMapper = new ObjectMapper();
         String data = objectMapper.writeValueAsString(quoteEventDTO);
-        assertThrows(PartnerEventSendToQueueException.class, () -> quoteWebSocketClient.onText(websocket, data, false));
+        assertDoesNotThrow(() -> quoteWebSocketClient.onText(websocket, data, false));
     }
 }

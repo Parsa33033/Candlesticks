@@ -5,7 +5,7 @@ import com.tr.candlestickprovider.config.CandlestickConfig;
 import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.consts.URL;
 import com.tr.candlestickprovider.model.dto.InstrumentEventDTO;
-import com.tr.candlestickprovider.service.exceptions.InstrumentEvenNotSupportedException;
+import com.tr.candlestickprovider.service.exceptions.InstrumentEventNotSupportedException;
 import com.tr.candlestickprovider.service.exceptions.PartnerEventReceiveException;
 import com.tr.candlestickprovider.service.exceptions.PartnerEventSendToQueueException;
 import com.tr.candlestickprovider.service.exceptions.WebSocketNotConnectedException;
@@ -76,7 +76,7 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
             instrumentSenderService.send(instrumentEventDTO);
         } catch (PartnerEventSendToQueueException e) {
             throw e;
-        } catch (InstrumentEvenNotSupportedException e) {
+        } catch (InstrumentEventNotSupportedException e) {
             throw e;
         } catch (Exception e) {
             throw new PartnerEventReceiveException(data.toString(), Constant.QUOTE, e.getMessage());
