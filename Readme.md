@@ -149,10 +149,12 @@ The tech used for this API are:
 
 1) Java 11
 2) Spring boot
-3) Redis
+3) Redis 
 4) MongoDB
 5) RabbitMQ
 6) Hibernate
+
+**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked** 
 
 ## Requirements
 
