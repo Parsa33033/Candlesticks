@@ -1,12 +1,11 @@
-package com.tr.candlestickprovider.service.impl;
+package com.tr.candlestickbuilder.service.impl;
 
-import com.tr.candlestickprovider.model.dto.InstrumentDTO;
-import com.tr.candlestickprovider.model.enums.Type;
-import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
-import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
+import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
+import com.tr.candlestickbuilder.model.enums.Type;
+import com.tr.candlestickbuilder.service.exceptions.InstrumentNotFoundException;
+import com.tr.candlestickbuilder.service.exceptions.InstrumentTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;

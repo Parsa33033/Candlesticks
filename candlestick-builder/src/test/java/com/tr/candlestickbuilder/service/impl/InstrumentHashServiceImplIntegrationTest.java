@@ -1,13 +1,13 @@
-package com.tr.candlestickprovider.service.impl;
+package com.tr.candlestickbuilder.service.impl;
 
-import com.tr.candlestickprovider.model.dto.CandlestickDTO;
-import com.tr.candlestickprovider.model.dto.InstrumentDTO;
-import com.tr.candlestickprovider.model.enums.Type;
-import com.tr.candlestickprovider.model.mapper.CandlestickHashMapper;
-import com.tr.candlestickprovider.model.mapper.InstrumentHashMapper;
-import com.tr.candlestickprovider.model.redis.InstrumentHash;
-import com.tr.candlestickprovider.repository.InstrumentHashRepository;
-import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
+import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
+import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
+import com.tr.candlestickbuilder.model.enums.Type;
+import com.tr.candlestickbuilder.model.mapper.CandlestickHashMapper;
+import com.tr.candlestickbuilder.model.mapper.InstrumentHashMapper;
+import com.tr.candlestickbuilder.model.redis.InstrumentHash;
+import com.tr.candlestickbuilder.repository.InstrumentHashRepository;
+import com.tr.candlestickbuilder.service.exceptions.InstrumentNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,15 +15,10 @@ import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import redis.embedded.RedisServer;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

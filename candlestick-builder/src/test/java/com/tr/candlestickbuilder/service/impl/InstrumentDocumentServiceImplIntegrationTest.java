@@ -1,38 +1,30 @@
-package com.tr.candlestickprovider.service.impl;
+package com.tr.candlestickbuilder.service.impl;
 
-import com.tr.candlestickprovider.model.dto.CandlestickDTO;
-import com.tr.candlestickprovider.model.dto.InstrumentDTO;
-import com.tr.candlestickprovider.model.enums.Type;
-import com.tr.candlestickprovider.model.mapper.CandlestickDocumentMapper;
-import com.tr.candlestickprovider.model.mapper.InstrumentDocumentMapper;
-import com.tr.candlestickprovider.model.mongodb.InstrumentDocument;
-import com.tr.candlestickprovider.repository.InstrumentDocumentRepository;
-import com.tr.candlestickprovider.service.InstrumentService;
-import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
+import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
+import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
+import com.tr.candlestickbuilder.model.enums.Type;
+import com.tr.candlestickbuilder.model.mapper.CandlestickDocumentMapper;
+import com.tr.candlestickbuilder.model.mapper.InstrumentDocumentMapper;
+import com.tr.candlestickbuilder.model.mongodb.InstrumentDocument;
+import com.tr.candlestickbuilder.repository.InstrumentDocumentRepository;
+import com.tr.candlestickbuilder.service.exceptions.InstrumentNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataMongoTest
 @ActiveProfiles("test")

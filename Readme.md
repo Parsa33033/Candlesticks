@@ -93,10 +93,7 @@ Instruments
 Quotes
 
 1) Listen for quotes coming from the `quote_queue`
-2) Create a temporary Candlestick object in the cache for a specific minute
-3) Update the temporary cache values as quotes for that specific minute come as a stream
-4) if minute increased, add the temporary candlestick to the list of candlesticks for that specific instrument
-5) create a new temporary Candlestick object for the 'new' minute
+2) update candlesticks with algorithm
 
 
 ### Algorithm
