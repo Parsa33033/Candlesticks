@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9000
 
 
 spring:
@@ -26,3 +26,4 @@ logging:
     name: logs.log
   level:
     com.tr.candlestickbuilder: debug
+

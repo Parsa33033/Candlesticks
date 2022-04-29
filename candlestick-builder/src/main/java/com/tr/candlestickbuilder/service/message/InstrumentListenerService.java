@@ -6,7 +6,6 @@ import com.tr.candlestickbuilder.config.RabbitConfig;
 import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
 import com.tr.candlestickbuilder.model.dto.InstrumentEventDTO;;
 import com.tr.candlestickbuilder.model.enums.Type;
-import com.tr.candlestickbuilder.service.InstrumentDocumentService;
 import com.tr.candlestickbuilder.service.InstrumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +23,10 @@ public class InstrumentListenerService {
 
     private final InstrumentService instrumentService;
 
-    private final InstrumentDocumentService instrumentDocumentService;
-
     public InstrumentListenerService(ObjectMapper objectMapper,
-                                     InstrumentService instrumentService,
-                                     InstrumentDocumentService instrumentDocumentService) {
+                                     InstrumentService instrumentService) {
         this.objectMapper = objectMapper;
         this.instrumentService = instrumentService;
-        this.instrumentDocumentService = instrumentDocumentService;
     }
 
     /**

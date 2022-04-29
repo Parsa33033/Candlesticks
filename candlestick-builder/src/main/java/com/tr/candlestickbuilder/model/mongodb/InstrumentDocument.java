@@ -1,24 +1,19 @@
-package com.tr.candlestickbuilder.model;
+package com.tr.candlestickbuilder.model.mongodb;
 
 import com.tr.candlestickbuilder.consts.Constant;
-import com.tr.candlestickbuilder.model.enums.Type;
+import com.tr.candlestickbuilder.model.Instrument;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Document(Constant.INSTRUMENT)
-public class InstrumentDocument {
+public class InstrumentDocument extends Instrument {
 
     @Id
     private String isin;
 
-    private String description;
-
-    private Type type;
-
-    private List<CandlestickDocument> candlesticks;
-
+    List<CandlestickDocument> candlesticks;
 
     public String getIsin() {
         return isin;
@@ -26,22 +21,6 @@ public class InstrumentDocument {
 
     public void setIsin(String isin) {
         this.isin = isin;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public List<CandlestickDocument> getCandlesticks() {
@@ -54,10 +33,8 @@ public class InstrumentDocument {
 
     @Override
     public String toString() {
-        return "Instrument{" +
+        return "InstrumentDocument{" +
                 "isin='" + isin + '\'' +
-                ", description='" + description + '\'' +
-                ", type=" + type +
                 ", candlesticks=" + candlesticks +
                 '}';
     }

@@ -1,8 +1,6 @@
 server:
   port: 9000
 
-application:
-  partner-url: "ws://localhost:8032"
 
 spring:
   application:
@@ -29,5 +27,5 @@ logging:
     path: ./logs
     name: logs.log
   level:
-    com.tr.candlestickprovider: debug
+    com.tr.candlestickprovider: info
 

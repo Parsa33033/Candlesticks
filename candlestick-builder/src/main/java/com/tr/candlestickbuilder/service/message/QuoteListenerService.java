@@ -7,8 +7,6 @@ import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
 import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
 import com.tr.candlestickbuilder.model.dto.QuoteDTO;
 import com.tr.candlestickbuilder.model.redis.Candlestick;
-import com.tr.candlestickbuilder.service.CandlestickService;
-import com.tr.candlestickbuilder.service.InstrumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 
 @Service

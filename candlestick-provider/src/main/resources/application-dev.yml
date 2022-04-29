@@ -25,5 +25,5 @@ logging:
     path: ./logs
     name: logs.log
   level:
-    com.tr.candlestickbuilder: debug
+    com.tr.candlestickprovider: debug
 

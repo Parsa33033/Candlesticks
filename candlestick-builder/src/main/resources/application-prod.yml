@@ -1,7 +1,12 @@
 server:
-  port: 9001
+  port: 9000
+
+application:
+  partner-url: "ws://localhost:8032"
 
 spring:
+  application:
+    name: tr_candlesticks
   rabbitmq:
     host: localhost
     username: guest
@@ -25,3 +30,4 @@ logging:
     name: logs.log
   level:
     com.tr.candlestickbuilder: info
+

@@ -2,7 +2,6 @@ package com.tr.candlestickbuilder.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tr.candlestickbuilder.model.enums.Type;
-import com.tr.candlestickbuilder.model.redis.Candlestick;
 
 import java.util.List;
 
@@ -14,14 +13,13 @@ public class InstrumentDTO {
 
     private Type type;
 
+    private String timestamp;
+
+    @JsonIgnore
     private List<CandlestickDTO> candlesticks;
 
-    public String getIsin() {
-        return isin;
-    }
-
-    public void setIsin(String isin) {
-        this.isin = isin;
+    public InstrumentDTO() {
+        super();
     }
 
     public String getDescription() {
@@ -30,6 +28,14 @@ public class InstrumentDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public void setIsin(String isin) {
+        this.isin = isin;
     }
 
     public Type getType() {
@@ -48,12 +54,21 @@ public class InstrumentDTO {
         this.candlesticks = candlesticks;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return "InstrumentDTO{" +
                 "isin='" + isin + '\'' +
                 ", description='" + description + '\'' +
                 ", type=" + type +
+                ", timestamp='" + timestamp + '\'' +
                 ", candlesticks=" + candlesticks +
                 '}';
     }
