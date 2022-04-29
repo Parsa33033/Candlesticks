@@ -3,6 +3,7 @@ package com.tr.candlestickprovider.rest;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
 import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
 import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
 import com.tr.candlestickprovider.service.impl.InstrumentServiceImpl;
@@ -30,7 +31,8 @@ public class InstrumentController {
      * @return
      */
     @GetMapping("/instruments/{isin}")
-    public InstrumentDTO getInstrument(@PathVariable(value = "isin", required = true) String isin) {
+    public InstrumentDTO getInstrument(@PathVariable(value = "isin", required = true) String isin)
+            throws InstrumentNotFoundException {
         return this.instrumentService.getByIsin(isin, 0);
     }
 

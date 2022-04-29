@@ -61,7 +61,7 @@ class InstrumentHashServiceImplIntegrationTest {
     }
 
     @Test
-    void assertThatInstrumentHashServiceImplWorksCorrectly() {
+    void assertThatInstrumentHashServiceImplWorksCorrectly() throws InstrumentNotFoundException {
         // check if empty
         boolean result = instrumentHashService.hasInstrument(isin);
         assertEquals(result, false);
@@ -98,7 +98,7 @@ class InstrumentHashServiceImplIntegrationTest {
     }
 
     @Test
-    public void assertThatListOfCandlesticksWillHaveTheRightSizeAsNeeded() {
+    public void assertThatListOfCandlesticksWillHaveTheRightSizeAsNeeded() throws InstrumentNotFoundException {
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
         instrumentDTO.setCandlesticks(new ArrayList<>());

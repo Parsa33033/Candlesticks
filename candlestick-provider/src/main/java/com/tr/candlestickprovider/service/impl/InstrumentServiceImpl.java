@@ -3,6 +3,7 @@ package com.tr.candlestickprovider.service.impl;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
 import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
 import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class InstrumentServiceImpl implements InstrumentService {
     }
 
     @Override
-    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) {
+    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) throws InstrumentNotFoundException {
         if (hasInstrument(isin)) {
             return this.instrumentHashService.getByIsin(isin, candlesticksLimit);
         } else {

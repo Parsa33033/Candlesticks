@@ -61,7 +61,7 @@ class InstrumentDocumentServiceImplIntegrationTest {
     }
 
     @Test
-    void assertThatInstrumentDocumentServiceImplWorksCorrectly() {
+    void assertThatInstrumentDocumentServiceImplWorksCorrectly() throws InstrumentNotFoundException {
         // check if empty
         boolean result = instrumentDocumentService.hasInstrument(isin);
         assertEquals(result, false);
@@ -98,7 +98,7 @@ class InstrumentDocumentServiceImplIntegrationTest {
     }
 
     @Test
-    public void assertThatListOfCandlesticksWillHaveTheRightSizeAsNeeded() {
+    public void assertThatListOfCandlesticksWillHaveTheRightSizeAsNeeded() throws InstrumentNotFoundException {
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
         instrumentDTO.setCandlesticks(new ArrayList<>());

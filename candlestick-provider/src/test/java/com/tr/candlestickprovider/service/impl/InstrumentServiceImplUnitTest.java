@@ -2,6 +2,7 @@ package com.tr.candlestickprovider.service.impl;
 
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
+import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
 import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class InstrumentServiceImplUnitTest {
     }
 
     @Test
-    public void testIfRedisHasDataItReturnsFromRedisAndIfNotFromMongo() {
+    public void testIfRedisHasDataItReturnsFromRedisAndIfNotFromMongo() throws InstrumentNotFoundException {
 
         String isin = "isin";
         String redis = "redis";

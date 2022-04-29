@@ -47,7 +47,7 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
      * @return
      */
     @Override
-    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) {
+    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) throws InstrumentNotFoundException {
         Optional<InstrumentDocument> instrumentOptional = this.instrumentDocumentRepository.findById(isin);
         if (instrumentOptional.isPresent()) {
             InstrumentDocument instrument = instrumentOptional.get();
