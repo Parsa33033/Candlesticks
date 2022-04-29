@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a05162-14b0-49ce-853e-30869c008f57" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/candlestick-provider/src/test/java/com/tr/candlestickprovider/service/websocket/WebsocketServiceUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +35,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Shell Script.build.sh">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="build.sh" type="ShConfigurationType" temporary="true">
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/build.sh" />
@@ -124,6 +136,8 @@
       <workItem from="1651174559776" duration="111000" />
       <workItem from="1651174711105" duration="374000" />
       <workItem from="1651175121639" duration="292000" />
+      <workItem from="1651221050269" duration="62000" />
+      <workItem from="1651221126937" duration="52000" />
     </task>
     <servers />
   </component>
