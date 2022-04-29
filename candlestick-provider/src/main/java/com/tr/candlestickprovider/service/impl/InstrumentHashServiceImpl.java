@@ -40,7 +40,7 @@ public class InstrumentHashServiceImpl implements InstrumentService {
     }
 
     @Override
-    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) {
+    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) throws InstrumentNotFoundException {
         if (hasInstrument(isin)) {
             InstrumentHash instrument = this.instrumentHashRepository.findById(isin).get();
             List<CandlestickDTO> candlestickDTOS =
@@ -90,5 +90,10 @@ public class InstrumentHashServiceImpl implements InstrumentService {
     @Override
     public void deleteByIsin(String isin) {
         this.instrumentHashRepository.deleteById(isin);
+    }
+
+    @Override
+    public void deleteAll() {
+        this.instrumentHashRepository.deleteAll();
     }
 }

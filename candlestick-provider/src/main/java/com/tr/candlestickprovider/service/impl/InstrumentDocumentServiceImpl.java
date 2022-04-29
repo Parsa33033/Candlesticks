@@ -40,8 +40,14 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
         return false;
     }
 
+    /**
+     *
+     * @param isin
+     * @param candlesticksLimit 0 for fetching all candlesticks, otherwise fetch a list of size candlestickLimit
+     * @return
+     */
     @Override
-    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) {
+    public InstrumentDTO getByIsin(String isin, int candlesticksLimit) throws InstrumentNotFoundException {
         Optional<InstrumentDocument> instrumentOptional = this.instrumentDocumentRepository.findById(isin);
         if (instrumentOptional.isPresent()) {
             InstrumentDocument instrument = instrumentOptional.get();
@@ -91,5 +97,10 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
     @Override
     public void deleteByIsin(String isin) {
         this.instrumentDocumentRepository.deleteById(isin);
+    }
+
+    @Override
+    public void deleteAll() {
+        this.instrumentDocumentRepository.deleteAll();
     }
 }

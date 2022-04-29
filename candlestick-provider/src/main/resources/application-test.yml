@@ -1,8 +1,12 @@
 server:
   port: 9000
 
+application:
+  partner-url: "ws://localhost:8032"
 
 spring:
+  application:
+    name: tr_candlesticks
   rabbitmq:
     host: localhost
     username: guest
@@ -14,9 +18,6 @@ spring:
   data:
     mongodb:
       host: localhost
-      username: admin
-      password: password
-      database: admin
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,5 +26,5 @@ logging:
     path: ./logs
     name: logs.log
   level:
-    com.tr.candlestickbuilder: debug
+    com.tr.candlestickprovider: debug
 

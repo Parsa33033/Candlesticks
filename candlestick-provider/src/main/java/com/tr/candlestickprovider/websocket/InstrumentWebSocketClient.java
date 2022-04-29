@@ -1,18 +1,24 @@
 package com.tr.candlestickprovider.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tr.candlestickprovider.config.CandlestickConfig;
+import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.consts.URL;
 import com.tr.candlestickprovider.model.dto.InstrumentEventDTO;
+import com.tr.candlestickprovider.service.exceptions.InstrumentEventNotSupportedException;
+import com.tr.candlestickprovider.service.exceptions.PartnerEventReceiveException;
+import com.tr.candlestickprovider.service.exceptions.PartnerEventSendToQueueException;
+import com.tr.candlestickprovider.service.exceptions.WebSocketNotConnectedException;
 import com.tr.candlestickprovider.service.message.InstrumentSenderService;
+import com.tr.candlestickprovider.service.websocket.WebsocketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.WebSocket;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CompletionStage;
 
 
@@ -25,16 +31,21 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
     Logger logger = LoggerFactory.getLogger(InstrumentWebSocketClient.class);
 
     private final ObjectMapper objectMapper;
+
     private final InstrumentSenderService instrumentSenderService;
 
-    @Value("${application.partner-url}")
-    private String url;
+    private final WebsocketService websocketService;
 
+    private final String url;
 
     public InstrumentWebSocketClient(ObjectMapper objectMapper,
-                                     InstrumentSenderService instrumentSenderService) {
+                                     InstrumentSenderService instrumentSenderService,
+                                     WebsocketService websocketService,
+                                     CandlestickConfig candlestickConfig) {
         this.objectMapper = objectMapper;
         this.instrumentSenderService = instrumentSenderService;
+        this.websocketService = websocketService;
+        this.url = candlestickConfig.getPartner().getUrl();
     }
 
     /**
@@ -42,10 +53,17 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
      */
     @PostConstruct
     public void getInstruments() {
-        HttpClient
-                .newHttpClient()
-                .newWebSocketBuilder()
-                .buildAsync(URI.create(url + URL.INSTRUMENTS_ENDPOINT), this);
+        try {
+            websocketService.connect(url, URL.INSTRUMENTS_ENDPOINT, this);
+        } catch (WebSocketNotConnectedException e) {
+            logger.info(e.getMessage());
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    getInstruments();
+                }
+            }, 5000);
+        }
 
     }
 
@@ -54,10 +72,14 @@ public class InstrumentWebSocketClient implements WebSocket.Listener{
         try {
             InstrumentEventDTO instrumentEventDTO =
                     objectMapper.readValue(data.toString(), InstrumentEventDTO.class);
-            logger.info("Instrument: ===> {}", instrumentEventDTO);
+            logger.info("Received Instrument: ===> {}", instrumentEventDTO);
             instrumentSenderService.send(instrumentEventDTO);
+        } catch (PartnerEventSendToQueueException e) {
+            throw e;
+        } catch (InstrumentEventNotSupportedException e) {
+            throw e;
         } catch (Exception e) {
-            logger.warn(e.getMessage());
+            throw new PartnerEventReceiveException(data.toString(), Constant.QUOTE, e.getMessage());
         }
         return WebSocket.Listener.super.onText(webSocket, data, last);
     }

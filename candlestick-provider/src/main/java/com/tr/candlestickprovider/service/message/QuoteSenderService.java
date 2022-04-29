@@ -1,46 +1,27 @@
 package com.tr.candlestickprovider.service.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tr.candlestickprovider.config.RabbitConfig;
 import com.tr.candlestickprovider.consts.Constant;
 import com.tr.candlestickprovider.consts.RabbitRouteBuilder;
 import com.tr.candlestickprovider.model.dto.*;
-import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.TopicExchange;
+import com.tr.candlestickprovider.service.exceptions.PartnerEventSendToQueueException;
+import com.tr.candlestickprovider.service.exceptions.QuoteEventNotSupportedException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Random;
 
 /**
  * Sends Quote messages to messaging queue
  */
 @Service
 public class QuoteSenderService {
-    Logger logger = LoggerFactory.getLogger(QuoteSenderService.class);
+
     private final RabbitTemplate rabbitTemplate;
 
-    private final InstrumentHashServiceImpl instrumentService;
-
-    private final ObjectMapper objectMapper;
-
-    private final TopicExchange topicExchange;
-
-    private final static Random rand = new Random();
-
-    public QuoteSenderService(RabbitTemplate rabbitTemplate,
-                              InstrumentHashServiceImpl instrumentService,
-                              ObjectMapper objectMapper,
-                              @Qualifier("quoteExchange") TopicExchange topicExchange) {
+    public QuoteSenderService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-        this.instrumentService = instrumentService;
-        this.objectMapper = objectMapper;
-        this.topicExchange = topicExchange;
     }
 
     /**
@@ -53,13 +34,24 @@ public class QuoteSenderService {
         try {
             QuoteDTO quoteDTO = quoteEventDTO.getQuoteDTO();
             quoteDTO.setTimestamp(Instant.now().toString());
+            if (isNotCorrect(quoteDTO)) throw new QuoteEventNotSupportedException(quoteEventDTO.toString());
             String route = RabbitRouteBuilder.from(Constant.QUOTE).toAnywhere().build();
             this.rabbitTemplate.convertAndSend(RabbitConfig.MAIN_EXCHANGE,
                     route,
                     quoteDTO);
+        } catch (QuoteEventNotSupportedException e) {
+            throw e;
         } catch (Exception e) {
-            logger.error("Quote Error: {}", e.getMessage());
+            throw new PartnerEventSendToQueueException(quoteEventDTO.toString(), Constant.QUOTE, e.getMessage());
         }
+    }
+
+    public boolean isNotCorrect(QuoteDTO quoteDTO) {
+        String isin = quoteDTO.getIsin();
+        double price = quoteDTO.getPrice();
+        String timestamp = quoteDTO.getTimestamp();
+        return isin == null || isin.isEmpty() ||
+                price < 0 || timestamp == null || timestamp.isEmpty();
     }
 
 }
