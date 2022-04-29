@@ -186,6 +186,11 @@ For running the API, the steps below must be followed:
    ```
    Project_Folder_Path> build.sh
    ```
+   - Or you can simply run `mvn clean package` in both `candlestick-provider` and `candlestick-builder` folders to create the build in 
+   target folder. From target folder of both services, you can run `java -jar <the name of the jar file>`
+
+
+
 
 3) After the build is finished, run `run-candlestick-provider.sh` to start the candlestick-provider service
    ```
