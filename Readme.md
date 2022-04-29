@@ -193,7 +193,7 @@ To test the endpoints, you have two options
 
 You can have a UI for api checking by entering the address below in your browser:
 
-`http://localhost:9000/swagger-ui.html`
+`http://localhost:9000/api/swagger-ui.html`
 
 
 #### Option 2: Use Curl, Postman, or any API testing software
