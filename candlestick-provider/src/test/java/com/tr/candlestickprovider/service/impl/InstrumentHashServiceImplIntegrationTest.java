@@ -22,7 +22,9 @@ import org.springframework.test.context.TestPropertySource;
 import redis.embedded.RedisServer;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,6 +60,7 @@ class InstrumentHashServiceImplIntegrationTest {
                 candlestickHashMapper);
         instrumentHash = new InstrumentHash();
         instrumentHash.setIsin(isin);
+        instrumentHashService.deleteAll();
     }
 
     @Test
@@ -70,7 +73,7 @@ class InstrumentHashServiceImplIntegrationTest {
         // get the instance
         InstrumentDTO instrumentDTOGet = instrumentHashService.getByIsin(isin, 0);
         // check if save returned instance and get instance have the same string and contain the isin
-        instrumentDTOSave.setCandlesticks(new ArrayList<>());
+        instrumentDTOSave.setCandlesticks(new HashMap<>());
         assertEquals(instrumentDTOGet.toString(), instrumentDTOSave.toString());
         assertEquals(instrumentDTOGet.getIsin(), isin);
         //delete by isin and check if fetch returns an InstrumentNotFoundException
@@ -101,7 +104,7 @@ class InstrumentHashServiceImplIntegrationTest {
     public void assertThatListOfCandlesticksWillHaveTheRightSizeAsNeeded() throws InstrumentNotFoundException {
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
-        instrumentDTO.setCandlesticks(new ArrayList<>());
+        instrumentDTO.setCandlesticks(new HashMap<>());
         instrumentHashService.save(instrumentDTO);
         int count = 40;
         for (int i = 1; i <= count; i++) {
@@ -109,7 +112,7 @@ class InstrumentHashServiceImplIntegrationTest {
             candlestickDTO.setIsin(isin);
             candlestickDTO.setOpenTimestamp(Instant.now().toString());
             instrumentDTO = instrumentHashService.getByIsin(isin, 0);
-            instrumentDTO.getCandlesticks().add(candlestickDTO);
+            instrumentDTO.getCandlesticks().put(i + "", candlestickDTO);
             instrumentHashService.save(instrumentDTO);
         }
         int limit = 30;
@@ -117,15 +120,15 @@ class InstrumentHashServiceImplIntegrationTest {
                 count);
         assertEquals(instrumentHashService.getByIsin(isin, limit).getCandlesticks().size(),
                 limit);
-        int n = 15;
-        assertThat(n).isGreaterThan(count - limit);
+        int n = 5;
+        assertThat(n).isLessThan(count - limit);
         instrumentDTO = instrumentHashService.getByIsin(isin, 0);
         for (int i = 1; i <= n; i++) {
             instrumentDTO.getCandlesticks().remove(0);
         }
         instrumentHashService.save(instrumentDTO);
         assertEquals(instrumentHashService.getByIsin(isin, limit).getCandlesticks().size(),
-                count - n);
+                limit);
 
     }
 

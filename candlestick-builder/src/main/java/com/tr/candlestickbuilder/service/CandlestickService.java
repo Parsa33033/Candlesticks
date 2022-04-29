@@ -1,9 +1,10 @@
 package com.tr.candlestickbuilder.service;
 
+import com.tr.candlestickbuilder.model.Candlestick;
 import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
-import com.tr.candlestickbuilder.model.mapper.CandlestickMapper;
-import com.tr.candlestickbuilder.model.redis.Candlestick;
-import com.tr.candlestickbuilder.repository.CandlestickRepository;
+import com.tr.candlestickbuilder.model.mapper.CandlestickHashMapper;
+import com.tr.candlestickbuilder.model.redis.CandlestickHash;
+import com.tr.candlestickbuilder.repository.CandlestickHashRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +15,12 @@ import java.util.stream.StreamSupport;
 @Service
 public class CandlestickService {
 
-    private final CandlestickRepository candlestickRepository;
+    private final CandlestickHashRepository candlestickRepository;
 
-    private final CandlestickMapper candlestickMapper;
+    private final CandlestickHashMapper candlestickMapper;
 
-    public CandlestickService(CandlestickRepository candlestickRepository,
-                              CandlestickMapper candlestickMapper) {
+    public CandlestickService(CandlestickHashRepository candlestickRepository,
+                              CandlestickHashMapper candlestickMapper) {
         this.candlestickRepository = candlestickRepository;
         this.candlestickMapper = candlestickMapper;
     }
@@ -40,7 +41,7 @@ public class CandlestickService {
     }
 
     public void save(CandlestickDTO candlestickDTO) {
-        Candlestick candlestick = candlestickMapper.toEntity(candlestickDTO);
+        CandlestickHash candlestick = candlestickMapper.toEntity(candlestickDTO);
         candlestickRepository.save(candlestick);
     }
 

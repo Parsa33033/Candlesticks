@@ -3,7 +3,7 @@ package com.tr.candlestickprovider.model.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tr.candlestickprovider.model.enums.Type;
 
-import java.util.List;
+import java.util.Map;
 
 public class InstrumentDTO {
 
@@ -16,7 +16,7 @@ public class InstrumentDTO {
     private String timestamp;
 
     @JsonIgnore
-    private List<CandlestickDTO> candlesticks;
+    private Map<String, CandlestickDTO> candlesticks;
 
     public InstrumentDTO() {
         super();
@@ -46,11 +46,11 @@ public class InstrumentDTO {
         this.type = type;
     }
 
-    public List<CandlestickDTO> getCandlesticks() {
+    public Map<String, CandlestickDTO> getCandlesticks() {
         return candlesticks;
     }
 
-    public void setCandlesticks(List<CandlestickDTO> candlesticks) {
+    public void setCandlesticks(Map<String, CandlestickDTO> candlesticks) {
         this.candlesticks = candlesticks;
     }
 

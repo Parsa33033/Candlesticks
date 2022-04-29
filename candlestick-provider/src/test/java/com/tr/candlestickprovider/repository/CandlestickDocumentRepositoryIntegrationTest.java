@@ -43,7 +43,6 @@ class CandlestickDocumentRepositoryIntegrationTest {
         candlestickDocument.setIsin(isin);
         candlestickDocument.setCloseTimestamp(instant);
         candlestickDocument.setClosingPrice(closingPrice);
-        candlestickDocument.setCurrentTimestamp(instant);
         candlestickDocument.setHighPrice(highPrice);
         candlestickDocument.setLowPrice(lowPrice);
         candlestickDocument.setOpenPrice(openPrice);
@@ -60,8 +59,6 @@ class CandlestickDocumentRepositoryIntegrationTest {
         c2.setOpenTimestamp(c2.getOpenTimestamp().truncatedTo(ChronoUnit.SECONDS));
         c1.setCloseTimestamp(c1.getCloseTimestamp().truncatedTo(ChronoUnit.SECONDS));
         c2.setCloseTimestamp(c2.getCloseTimestamp().truncatedTo(ChronoUnit.SECONDS));
-        c1.setCurrentTimestamp(c1.getCurrentTimestamp().truncatedTo(ChronoUnit.SECONDS));
-        c2.setCurrentTimestamp(c2.getCurrentTimestamp().truncatedTo(ChronoUnit.SECONDS));
         assertThat(oc2.isPresent()).isEqualTo(true);
         assertThat(c2.toString()).isEqualTo(c1.toString());
         long size = candlestickDocumentRepository.findAll().spliterator().getExactSizeIfKnown();

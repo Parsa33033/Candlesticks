@@ -1,9 +1,6 @@
 package com.tr.candlestickprovider.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.time.Instant;
 
 public class CandlestickDTO {
 
@@ -11,9 +8,6 @@ public class CandlestickDTO {
     private String isin;
 
     String openTimestamp;
-
-    @JsonIgnore
-    String currentTimestamp;
 
     double openPrice;
 
@@ -29,7 +23,6 @@ public class CandlestickDTO {
 
     public CandlestickDTO(String isin,
                           String openTimestamp,
-                          String currentTimestamp,
                           double openPrice,
                           double highPrice,
                           double lowPrice,
@@ -37,7 +30,6 @@ public class CandlestickDTO {
                           String closeTimestamp) {
         this.isin = isin;
         this.openTimestamp = openTimestamp;
-        this.currentTimestamp = currentTimestamp;
         this.openPrice = openPrice;
         this.highPrice = highPrice;
         this.lowPrice = lowPrice;
@@ -59,14 +51,6 @@ public class CandlestickDTO {
 
     public void setOpenTimestamp(String openTimestamp) {
         this.openTimestamp = openTimestamp;
-    }
-
-    public String getCurrentTimestamp() {
-        return currentTimestamp;
-    }
-
-    public void setCurrentTimestamp(String currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
     }
 
     public double getOpenPrice() {
@@ -113,13 +97,12 @@ public class CandlestickDTO {
     public String toString() {
         return "CandlestickDTO{" +
                 "isin='" + isin + '\'' +
-                ", openTimestamp=" + openTimestamp +
-                ", currentTimestamp=" + currentTimestamp +
+                ", openTimestamp='" + openTimestamp + '\'' +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +
                 ", lowPrice=" + lowPrice +
                 ", closingPrice=" + closingPrice +
-                ", closeTimestamp=" + closeTimestamp +
+                ", closeTimestamp='" + closeTimestamp + '\'' +
                 '}';
     }
 }

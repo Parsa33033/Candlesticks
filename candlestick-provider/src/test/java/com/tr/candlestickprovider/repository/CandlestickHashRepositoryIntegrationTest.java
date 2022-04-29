@@ -54,7 +54,6 @@ class CandlestickHashRepositoryIntegrationTest {
         candlestickHash.setIsin(isin);
         candlestickHash.setCloseTimestamp(instant);
         candlestickHash.setClosingPrice(closingPrice);
-        candlestickHash.setCurrentTimestamp(instant);
         candlestickHash.setHighPrice(highPrice);
         candlestickHash.setLowPrice(lowPrice);
         candlestickHash.setOpenPrice(openPrice);
@@ -71,8 +70,6 @@ class CandlestickHashRepositoryIntegrationTest {
         c2.setOpenTimestamp(c2.getOpenTimestamp().truncatedTo(ChronoUnit.SECONDS));
         c1.setCloseTimestamp(c1.getCloseTimestamp().truncatedTo(ChronoUnit.SECONDS));
         c2.setCloseTimestamp(c2.getCloseTimestamp().truncatedTo(ChronoUnit.SECONDS));
-        c1.setCurrentTimestamp(c1.getCurrentTimestamp().truncatedTo(ChronoUnit.SECONDS));
-        c2.setCurrentTimestamp(c2.getCurrentTimestamp().truncatedTo(ChronoUnit.SECONDS));
         assertThat(oc2.isPresent()).isEqualTo(true);
         assertThat(c2.toString()).isEqualTo(c1.toString());
         long size = candlestickHashRepository.findAll().spliterator().getExactSizeIfKnown();

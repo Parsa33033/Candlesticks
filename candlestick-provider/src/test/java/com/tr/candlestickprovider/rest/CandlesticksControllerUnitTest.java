@@ -33,7 +33,10 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -78,7 +81,9 @@ class CandlesticksControllerUnitTest {
         candlestickDTO.setIsin(isin);
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
-        instrumentDTO.setCandlesticks(Arrays.asList(candlestickDTO));
+        Map<String, CandlestickDTO> m = new HashMap<String, CandlestickDTO>();
+        m.put(Instant.now().toString(), candlestickDTO);
+        instrumentDTO.setCandlesticks((m));
 
         Mockito.when(instrumentService.hasInstrument(isin)).thenReturn(true);
         Mockito.when(instrumentHashService.hasInstrument(isin)).thenReturn(true);

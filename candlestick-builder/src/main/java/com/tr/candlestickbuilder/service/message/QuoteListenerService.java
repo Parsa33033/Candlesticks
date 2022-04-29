@@ -6,9 +6,11 @@ import com.tr.candlestickbuilder.config.RabbitConfig;
 import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
 import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
 import com.tr.candlestickbuilder.model.dto.QuoteDTO;
-import com.tr.candlestickbuilder.model.redis.Candlestick;
+import com.tr.candlestickbuilder.model.enums.Type;
 import com.tr.candlestickbuilder.service.CandlestickService;
 import com.tr.candlestickbuilder.service.InstrumentService;
+import com.tr.candlestickbuilder.service.exceptions.CandlesticksNullException;
+import com.tr.candlestickbuilder.service.exceptions.QuoteNotHandledWhenReceivedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 
 @Service
@@ -44,102 +45,91 @@ public class QuoteListenerService {
      * converts the payload into a QuoteDTO object
      * Updates the candlestick and if is done, add it to the instruments
      * candlesticks list
+     *
      * @param payload
      * @throws JsonProcessingException
      */
-    @RabbitListener(queues = {RabbitConfig.QUOTE_QUEUE})
+    @RabbitListener(queues = {RabbitConfig.QUOTE_QUEUE}, concurrency = "200")
     public void instrumentListener(String payload) throws JsonProcessingException {
         QuoteDTO quoteDTO = objectMapper.readValue(payload, QuoteDTO.class);
         logger.info("Quote ===> {}", quoteDTO);
         updateCandleStick(quoteDTO);
     }
 
-    /**
-     * Saves a new object of Candlestick
-     * @param quoteDTO
-     */
-    public void saveCandlestick(QuoteDTO quoteDTO) {
-        String isin = quoteDTO.getIsin();
-        Instant quoteTimestamp = Instant.parse(quoteDTO.getTimestamp());
-        CandlestickDTO candlestickDTO =
-                new CandlestickDTO(isin,
-                        quoteTimestamp,
-                        quoteTimestamp,
-                        quoteDTO.getPrice(),
-                        quoteDTO.getPrice(),
-                        quoteDTO.getPrice(),
-                        quoteDTO.getPrice(),
-                        quoteTimestamp);
-        candlestickService.save(candlestickDTO);
-    }
-
-    /**
-     * Pushes the created Candlestick to the instrument's candlesticks list
-     * @param candlestickDTO
-     */
-    public void pushToInstrumentList(CandlestickDTO candlestickDTO) {
-        String isin = candlestickDTO.getIsin();
-        if (instrumentService.hasInstrument(isin)) {
-            InstrumentDTO instrumentDTO = instrumentService.getByIsin(isin, CANDLESTICK_STACK_LIMIT);
-            if (instrumentDTO.getCandlesticks() != null && !instrumentDTO.getCandlesticks().isEmpty()) {
-                Instant candlestickOpenTimestamp = candlestickDTO.getOpenTimestamp();
-                Instant candlestickOpenTimestampToMin = candlestickOpenTimestamp.truncatedTo(ChronoUnit.MINUTES);
-                int i = 0;
-                for (CandlestickDTO cs: instrumentDTO.getCandlesticks()) {
-                    Instant csTimestampToMin = cs.getOpenTimestamp().truncatedTo(ChronoUnit.MINUTES);
-                    if (candlestickOpenTimestampToMin.compareTo(csTimestampToMin) < 0) i++;
-                    else break;
-                }
-                instrumentDTO.getCandlesticks().add(i, candlestickDTO);
-                instrumentService.save(instrumentDTO);
-            } else {
-                List<CandlestickDTO> candlestickDTOS = new ArrayList<>();
-                candlestickDTOS.add(candlestickDTO);
-                instrumentDTO.setCandlesticks(candlestickDTOS);
-                instrumentService.save(instrumentDTO);
-            }
-        } else {
-            InstrumentDTO instrumentDTO = new InstrumentDTO();
-            instrumentDTO.setIsin(isin);
-            instrumentDTO.setDescription("");
-            instrumentDTO.setCandlesticks(Arrays.asList(candlestickDTO));
-            instrumentService.save(instrumentDTO);
-        }
-    }
-
-    /**
-     * Updates the candlesticks if minute is not passed
-     * If minute is passed, the candlestick would be added
-     * to the instrument's candlesticks list
-     * @param quoteDTO
-     */
     public void updateCandleStick(QuoteDTO quoteDTO) {
-        String isin = quoteDTO.getIsin();
-        if (candlestickService.hasCandleStick(isin)) {
-            // If candlestick is present in the cache
-            CandlestickDTO candlestickDTO = candlestickService.getCandleStickById(isin);
-            Instant candlestickOpenTimestamp = candlestickDTO.getOpenTimestamp();
-            Instant quoteTimestamp = Instant.parse(quoteDTO.getTimestamp());
-            Instant candlestickOpenTimestampToMinute = candlestickOpenTimestamp.truncatedTo(ChronoUnit.MINUTES);
-            Instant quoteTimestampToMinute = quoteTimestamp.truncatedTo(ChronoUnit.MINUTES);
-            int compare = quoteTimestampToMinute.compareTo(candlestickOpenTimestampToMinute);
-            if (compare == 0) {
-                // If quote timestamp is equal to candlestick timestamp by minute
-                if (quoteDTO.getPrice() > candlestickDTO.getHighPrice())
-                    candlestickDTO.setHighPrice(quoteDTO.getPrice());
-                if (quoteDTO.getPrice() < candlestickDTO.getLowPrice())
-                    candlestickDTO.setLowPrice(quoteDTO.getPrice());
-                candlestickDTO.setClosingPrice(quoteDTO.getPrice());
-                candlestickService.save(candlestickDTO);
-            } else if (compare > 0){
-                // If quote timestamp is not equal to candlestick timestamp by minute
-                candlestickDTO.setCloseTimestamp(quoteTimestamp);
-                pushToInstrumentList(candlestickDTO);
-                saveCandlestick(quoteDTO);
+        try {
+            String isin = quoteDTO.getIsin();
+            // check if instrument exists if not create
+            if (instrumentService.hasInstrument(isin)) {
+                // create a key as quote timestamp truncated to minute (open timestamp)
+                String key = truncateTimestampToMin(quoteDTO.getTimestamp());
+                InstrumentDTO instrumentDTO = instrumentService.getByIsin(isin, 0);
+                Map<String, CandlestickDTO> candlestickDTOMap = instrumentDTO.getCandlesticks();
+                if (candlestickDTOMap == null) throw new CandlesticksNullException();
+                // fetch candlestick if key exists (opentimestamp as key)
+                if (candlestickDTOMap.containsKey(key)) {
+                    // assume quote timestamp as T and quote price as P
+                    String quoteTimestamp = quoteDTO.getTimestamp();
+                    Instant T = Instant.parse(quoteTimestamp);
+                    double P = quoteDTO.getPrice();
+
+                    CandlestickDTO candlestick = candlestickDTOMap.get(key);
+                    // if T < opentimestamp update opentimestamp to T
+                    if (T.isBefore(Instant.parse(candlestick.getOpenTimestamp()))) {
+                        candlestick.setOpenTimestamp(T.toString());
+                        candlestick.setOpenPrice(P);
+                    }
+                    // if T > closeTimestamp update closetimestamp to T
+                    if (T.isAfter(Instant.parse(candlestick.getCloseTimestamp()))) {
+                        candlestick.setCloseTimestamp(T.toString());
+                        candlestick.setClosingPrice(P);
+                    }
+                    // if P < lowprice update minprice to P
+                    if (P < candlestick.getLowPrice()) {
+                        candlestick.setLowPrice(P);
+                    }
+                    // if P > maxprice update maxprice to P
+                    if (P > candlestick.getHighPrice()) {
+                        candlestick.setHighPrice(P);
+                    }
+                    instrumentDTO.getCandlesticks().put(key, candlestick);
+                    instrumentService.save(instrumentDTO);
+                } else {
+                /*
+                  create a new candle stick and put it in the map of instruments candlesticks with
+                    as timestamp truncated to minute
+                 */
+                    CandlestickDTO candlestickDTO = new CandlestickDTO(
+                            isin,
+                            quoteDTO.getTimestamp(),
+                            quoteDTO.getPrice(),
+                            quoteDTO.getPrice(),
+                            quoteDTO.getPrice(),
+                            quoteDTO.getPrice(),
+                            quoteDTO.getTimestamp()
+                    );
+                    instrumentDTO.getCandlesticks()
+                            .put(truncateTimestampToMin(quoteDTO.getTimestamp()), candlestickDTO);
+                    instrumentService.save(instrumentDTO);
+                }
+            } else {
+                // create a new instrument
+                InstrumentDTO newInstrumentDTO = new InstrumentDTO();
+                newInstrumentDTO.setIsin(isin);
+                newInstrumentDTO.setType(Type.ADD);
+                newInstrumentDTO.setTimestamp(Instant.now().toString());
+                newInstrumentDTO.setDescription("");
+                newInstrumentDTO.setCandlesticks(new HashMap<>());
+                instrumentService.save(newInstrumentDTO);
             }
-        } else {
-            // If candlestick is not present in cache, create one
-            saveCandlestick(quoteDTO);
+        } catch (CandlesticksNullException e) {
+            throw new CandlesticksNullException();
+        } catch (Exception e) {
+            throw new QuoteNotHandledWhenReceivedException(quoteDTO.toString(), e.getMessage());
         }
+    }
+
+    public String truncateTimestampToMin(String timestamp) {
+        return Instant.parse(timestamp).truncatedTo(ChronoUnit.MINUTES).toString();
     }
 }

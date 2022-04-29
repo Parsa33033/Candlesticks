@@ -15,9 +15,8 @@ import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.Instant;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +51,9 @@ class InstrumentControllerUnitTest {
         candlestickDTO.setIsin(isin);
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
-        instrumentDTO.setCandlesticks(Arrays.asList(candlestickDTO));
+        Map<String, CandlestickDTO> m = new HashMap<String, CandlestickDTO>();
+        m.put(Instant.now().toString(), candlestickDTO);
+        instrumentDTO.setCandlesticks(m);
 
         Mockito.when(instrumentService.hasInstrument(isin)).thenReturn(true);
         Mockito.when(instrumentHashService.hasInstrument(isin)).thenReturn(true);
@@ -95,12 +96,14 @@ class InstrumentControllerUnitTest {
         // instrument 1
         InstrumentDTO instrumentDTO = new InstrumentDTO();
         instrumentDTO.setIsin(isin);
-        instrumentDTO.setCandlesticks(Arrays.asList(candlestickDTO));
+        Map<String, CandlestickDTO> m = new HashMap<String, CandlestickDTO>();
+        m.put(Instant.now().toString(), candlestickDTO);
+        instrumentDTO.setCandlesticks(m);
 
         //instrument 2
         InstrumentDTO instrumentDTO2 = new InstrumentDTO();
         instrumentDTO2.setIsin(isin);
-        instrumentDTO2.setCandlesticks(Arrays.asList(candlestickDTO));
+        instrumentDTO2.setCandlesticks(m);
 
         Mockito.when(instrumentService.hasInstrument(isin)).thenReturn(true);
         Mockito.when(instrumentHashService.hasInstrument(isin)).thenReturn(true);

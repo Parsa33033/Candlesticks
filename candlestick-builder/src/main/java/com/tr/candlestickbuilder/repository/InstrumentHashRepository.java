@@ -1,9 +1,10 @@
 package com.tr.candlestickbuilder.repository;
 
-import com.tr.candlestickbuilder.model.redis.Candlestick;
+import com.tr.candlestickbuilder.model.redis.InstrumentHash;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CandlestickRepository extends CrudRepository<Candlestick, String> {
+public interface InstrumentHashRepository extends CrudRepository<InstrumentHash, String> {
+
 }

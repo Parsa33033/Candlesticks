@@ -1,6 +1,6 @@
 package com.tr.candlestickbuilder.repository;
 
-import com.tr.candlestickbuilder.model.CandlestickDocument;
+import com.tr.candlestickbuilder.model.mongodb.CandlestickDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

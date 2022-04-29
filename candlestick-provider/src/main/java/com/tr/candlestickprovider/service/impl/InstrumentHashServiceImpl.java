@@ -12,8 +12,7 @@ import com.tr.candlestickprovider.service.InstrumentService;
 import com.tr.candlestickprovider.service.exceptions.InstrumentNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -43,14 +42,23 @@ public class InstrumentHashServiceImpl implements InstrumentService {
     public InstrumentDTO getByIsin(String isin, int candlesticksLimit) throws InstrumentNotFoundException {
         if (hasInstrument(isin)) {
             InstrumentHash instrument = this.instrumentHashRepository.findById(isin).get();
-            List<CandlestickDTO> candlestickDTOS =
-                    candlestickHashMapper.toDtos(instrument.getCandlesticks());
+            Map<String, CandlestickDTO> candlestickDTOS =
+                    candlestickHashMapper.toDtoMaps(instrument.getCandlesticks());
             if (candlestickDTOS == null)
-                candlestickDTOS = new ArrayList<>();
+                candlestickDTOS = new HashMap<>();
             if (!candlestickDTOS.isEmpty() &&
                     candlesticksLimit > 0 &&
                     candlesticksLimit <= candlestickDTOS.size()) {
-                candlestickDTOS = candlestickDTOS.stream().limit(candlesticksLimit).collect(Collectors.toList());
+                candlestickDTOS = candlestickDTOS.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .limit(candlesticksLimit)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+            } else {
+                candlestickDTOS = candlestickDTOS.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
             }
             InstrumentDTO instrumentDTO = instrumentHashMapper.toDto(instrument);
             instrumentDTO.setCandlesticks(candlestickDTOS);
@@ -76,7 +84,7 @@ public class InstrumentHashServiceImpl implements InstrumentService {
     @Override
     public InstrumentDTO save(InstrumentDTO instrumentDTO) {
         InstrumentHash instrument = instrumentHashMapper.toEntity(instrumentDTO);
-        List<CandlestickHash> candlesticks = candlestickHashMapper.toEntities(instrumentDTO.getCandlesticks());
+        Map<String, CandlestickHash> candlesticks = candlestickHashMapper.toEntityMaps(instrumentDTO.getCandlesticks());
         instrument.setCandlesticks(candlesticks);
         instrument = this.instrumentHashRepository.save(instrument);
         return instrumentHashMapper.toDto(instrument);
@@ -84,7 +92,7 @@ public class InstrumentHashServiceImpl implements InstrumentService {
 
     @Override
     public void saveAll(List<InstrumentDTO> instrumentDTOS) {
-        this.instrumentHashRepository.saveAll(instrumentHashMapper.toEntities(instrumentDTOS));
+        this.instrumentHashRepository.saveAll(instrumentHashMapper.toEntityLists(instrumentDTOS));
     }
 
     @Override

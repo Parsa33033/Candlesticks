@@ -1,20 +1,10 @@
-package com.tr.candlestickbuilder.model.redis;
-
-import com.tr.candlestickbuilder.consts.Constant;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+package com.tr.candlestickbuilder.model;
 
 import java.time.Instant;
 
-@RedisHash(Constant.CANDLESTICK)
 public class Candlestick {
 
-    @Id
-    private String isin;
-
     Instant openTimestamp;
-
-    Instant currentTimestamp;
 
     double openPrice;
 
@@ -26,28 +16,12 @@ public class Candlestick {
 
     Instant closeTimestamp;
 
-    public String getIsin() {
-        return isin;
-    }
-
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
-
     public Instant getOpenTimestamp() {
         return openTimestamp;
     }
 
     public void setOpenTimestamp(Instant openTimestamp) {
         this.openTimestamp = openTimestamp;
-    }
-
-    public Instant getCurrentTimestamp() {
-        return currentTimestamp;
-    }
-
-    public void setCurrentTimestamp(Instant currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
     }
 
     public double getOpenPrice() {
@@ -93,9 +67,7 @@ public class Candlestick {
     @Override
     public String toString() {
         return "Candlestick{" +
-                "isin='" + isin + '\'' +
-                ", openTimestamp=" + openTimestamp +
-                ", currentTimestamp=" + currentTimestamp +
+                "openTimestamp=" + openTimestamp +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +
                 ", lowPrice=" + lowPrice +

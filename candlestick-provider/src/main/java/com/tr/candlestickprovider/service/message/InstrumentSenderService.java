@@ -41,7 +41,6 @@ public class InstrumentSenderService {
         try {
             instrumentEventDTO.getInstrumentDTO().setTimestamp(Instant.now().toString());
             instrumentEventDTO.getInstrumentDTO().setType(instrumentEventDTO.getType());
-            instrumentEventDTO.getInstrumentDTO().setTimestamp(Instant.now().toString());
             if (isNotCorrect(instrumentEventDTO))
                 throw new InstrumentEventNotSupportedException(instrumentEventDTO.toString());
             String route = RabbitRouteBuilder.from(Constant.INSTRUMENT).toAnywhere().build();

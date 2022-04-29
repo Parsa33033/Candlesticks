@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,6 @@ class InstrumentServiceImplUnitTest {
 
     InstrumentHashServiceImpl instrumentHashService;
 
-    @InjectMocks
     InstrumentServiceImpl instrumentService;
 
     @BeforeEach
@@ -46,11 +46,13 @@ class InstrumentServiceImplUnitTest {
         InstrumentDTO instrumentDTORedis = new InstrumentDTO();
         instrumentDTORedis.setIsin(isin);
         instrumentDTORedis.setDescription(redis);
+        instrumentDTORedis.setCandlesticks(new HashMap<>());
 
         // mongo
         InstrumentDTO instrumentDTOMongo = new InstrumentDTO();
         instrumentDTOMongo.setIsin(isin);
         instrumentDTOMongo.setDescription(mongo);
+        instrumentDTOMongo.setCandlesticks(new HashMap<>());
 
         // claim redis has hash
         Mockito.when(instrumentService.hasInstrument(isin)).thenReturn(true);

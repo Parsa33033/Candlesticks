@@ -7,6 +7,7 @@
    - [Scale](#Scale)
    - [Non_Functional_Requirements](#Non_Functional_Requirements)
    - [Architecture](#Architecture)
+   - [Algorithm](#Algorithm)
 2. [Used_Tech](#Used_Tech)
 3. [Requirements](#Requirements)
 4. [How_to_run](#How_to_run)
@@ -92,10 +93,54 @@ Instruments
 Quotes
 
 1) Listen for quotes coming from the `quote_queue`
-2) Create a temporary Candlestick object in the cache for a specific minute
-3) Update the temporary cache values as quotes for that specific minute come as a stream
-4) if minute increased, add the temporary candlestick to the list of candlesticks for that specific instrument
-5) create a new temporary Candlestick object for the 'new' minute
+2) update candlesticks with algorithm
+
+
+### Algorithm
+
+This is the algorithm devised in candlestick-builder service when stream of quotes are fetched through the RabbitMQ queue to
+process quotes and create/update affiliated candlesticks.
+
+The implementaion can be found at: `candlestick-builder\src\main\java\com\tr\candlestickbuilder\service\message\`
+
+
+```aidl
+Function updateCandlesticks(Q)
+   Q: the quote input
+   T: timestamp of Q
+   P: price of Q
+   isin: the isin number in Q 
+   // check if instrument exists if not create
+   Key: the quote timestamp truncated to minute in string
+   
+   If database has instrument with isin number:
+      I: the instance of the instrument fetched from the database
+      M<K, C>: a map where:
+            K: string representation of timestamp truncated to minute
+            C: an instance of a candlestick
+      - create a key with quote timestamp truncated to minute (open timestamp of quote)
+      
+      If key exists in keyset of M<K, C>:
+            
+          // if T < opentimestamp update opentimestamp to T
+          If T < open timestamp of C:
+            - open timestamp of C <- T
+            - open price of C <- P
+          If T > close timestamp of C:
+            - close timestamp of C <- T
+            - close price of C <- P  
+          If P < low price of C:
+            - low price of C <- P
+          If P < high price of C:
+            - high price of C <- P
+      else:
+        - create a new candlestick and put in M<V, C> <- <K, new instance of C updated with Q>
+   else
+    - create a new instrument
+
+```
+
+
 
 ## Used_Tech
 
@@ -104,10 +149,12 @@ The tech used for this API are:
 
 1) Java 11
 2) Spring boot
-3) Redis
+3) Redis 
 4) MongoDB
 5) RabbitMQ
 6) Hibernate
+
+**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked** 
 
 ## Requirements
 

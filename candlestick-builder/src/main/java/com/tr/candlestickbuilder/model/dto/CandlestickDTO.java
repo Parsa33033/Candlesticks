@@ -2,15 +2,12 @@ package com.tr.candlestickbuilder.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.Instant;
-
 public class CandlestickDTO {
 
+    @JsonIgnore
     private String isin;
 
-    Instant openTimestamp;
-
-    Instant currentTimestamp;
+    String openTimestamp;
 
     double openPrice;
 
@@ -20,19 +17,19 @@ public class CandlestickDTO {
 
     double closingPrice;
 
-    Instant closeTimestamp;
+    String closeTimestamp;
+
+    public CandlestickDTO() {}
 
     public CandlestickDTO(String isin,
-                          Instant openTimestamp,
-                          Instant currentTimestamp,
+                          String openTimestamp,
                           double openPrice,
                           double highPrice,
                           double lowPrice,
                           double closingPrice,
-                          Instant closeTimestamp) {
+                          String closeTimestamp) {
         this.isin = isin;
         this.openTimestamp = openTimestamp;
-        this.currentTimestamp = currentTimestamp;
         this.openPrice = openPrice;
         this.highPrice = highPrice;
         this.lowPrice = lowPrice;
@@ -48,20 +45,12 @@ public class CandlestickDTO {
         this.isin = isin;
     }
 
-    public Instant getOpenTimestamp() {
+    public String getOpenTimestamp() {
         return openTimestamp;
     }
 
-    public void setOpenTimestamp(Instant openTimestamp) {
+    public void setOpenTimestamp(String openTimestamp) {
         this.openTimestamp = openTimestamp;
-    }
-
-    public Instant getCurrentTimestamp() {
-        return currentTimestamp;
-    }
-
-    public void setCurrentTimestamp(Instant currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
     }
 
     public double getOpenPrice() {
@@ -96,11 +85,11 @@ public class CandlestickDTO {
         this.closingPrice = closingPrice;
     }
 
-    public Instant getCloseTimestamp() {
+    public String getCloseTimestamp() {
         return closeTimestamp;
     }
 
-    public void setCloseTimestamp(Instant closeTimestamp) {
+    public void setCloseTimestamp(String closeTimestamp) {
         this.closeTimestamp = closeTimestamp;
     }
 
@@ -108,13 +97,12 @@ public class CandlestickDTO {
     public String toString() {
         return "CandlestickDTO{" +
                 "isin='" + isin + '\'' +
-                ", openTimestamp=" + openTimestamp +
-                ", currentTimestamp=" + currentTimestamp +
+                ", openTimestamp='" + openTimestamp + '\'' +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +
                 ", lowPrice=" + lowPrice +
                 ", closingPrice=" + closingPrice +
-                ", closeTimestamp=" + closeTimestamp +
+                ", closeTimestamp='" + closeTimestamp + '\'' +
                 '}';
     }
 }
