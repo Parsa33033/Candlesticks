@@ -110,10 +110,10 @@ Function updateCandlesticks(Q)
    T= timestamp of Q
    P= price of Q
    isin= the isin number in Q 
-   // check if instrument exists if not create
    Key= the quote timestamp truncated to minute in string
    
    If database has instrument with isin number
+   
       I= the instance of the instrument fetched from the database
       M<K, C>= a map where
             K= string representation of timestamp truncated to minute
@@ -121,8 +121,7 @@ Function updateCandlesticks(Q)
       - create a key with quote timestamp truncated to minute (open timestamp of quote)
       
       If key exists in keyset of M<K, C>
-            
-          // if T < opentimestamp update opentimestamp to T
+        
           If T < open timestamp of C
             - open timestamp of C <- T
             - open price of C <- P
@@ -133,9 +132,12 @@ Function updateCandlesticks(Q)
             - low price of C <- P
           If P < high price of C
             - high price of C <- P
+            
       else:
+      
         - create a new candlestick and put in M<V, C> <- <K, new instance of C updated with Q>
    else
+   
     - create a new instrument
 
 ```
