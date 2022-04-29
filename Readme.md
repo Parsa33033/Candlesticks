@@ -101,33 +101,47 @@ Quotes
 
 ### Algorithm
 
+This is the algorithm devised in candlestick-builder service when stream of quotes are fetched through the RabbitMQ queue to
+process quotes and create/update affiliated candlesticks.
+
+The implementaion can be found at: `candlestick-builder\src\main\java\com\tr\candlestickbuilder\service\message\`
+
+
 ```aidl
-// check if instrument exists if not create
-**if** checkInstrumentExists
-   // create a key as quote timestamp truncated to minute (open timestamp)
+Function updateCandlesticks(Q)
+   Q: the quote input
+   T: timestamp of Q
+   P: price of Q
+   isin: the isin number in Q 
+   // check if instrument exists if not create
+   Key: the quote timestamp truncated to minute in string
    
-   // fetch candlestick if key exists (opentimestamp as key)
-   if (candlesticktTimestampAsKeyExists) {
-       // call quote timestamp as T and quote price as P
-       // if T < opentimestamp update opentimestamp to T
-       
-       // if T > closeTimestamp update closetimestamp to T
-       
-       // if P < minprice update minprice to P
-       
-       // if P > maxprice update maxprice to P
-   } else {
-       /*
-         create a new candle stick and put it in the map of instruments candlesticks with
-           as timestamp truncated to minute
-        */
-   }
-} else {
-   // create a new instrument
-}
+   If database has instrument with isin number:
+      I: the instance of the instrument fetched from the database
+      M<K, C>: a map where:
+            K: string representation of timestamp truncated to minute
+            C: an instance of a candlestick
+      - create a key with quote timestamp truncated to minute (open timestamp of quote)
+      
+      If key exists in keyset of M<K, C>:
+            
+          // if T < opentimestamp update opentimestamp to T
+          If T < open timestamp of C:
+            - open timestamp of C <- T
+            - open price of C <- P
+          If T > close timestamp of C:
+            - close timestamp of C <- T
+            - close price of C <- P  
+          If P < low price of C:
+            - low price of C <- P
+          If P < high price of C:
+            - high price of C <- P
+      else:
+        - create a new candlestick and put in M<V, C> <- <K, new instance of C updated with Q>
+   else
+    - create a new instrument
 
 ```
-
 
 
 
