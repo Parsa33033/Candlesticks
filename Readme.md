@@ -174,20 +174,22 @@ Note: For facilitating manual running, docker-compose containers for the candles
 
 For running the API, the steps below must be followed:
 
-1) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` on the project's path to get the same result.
+1) To build the jar file for both services (`candlestick-provider` and `candlestick-builder`) run the command bellow on the project's path:
+
+   ```
+   Project_Folder_Path> build.sh
+   ```
+   - Or you can simply run `mvn clean package` in both `candlestick-provider` and `candlestick-builder` folders to create the build in
+     target folder. From target folder of both services, you can run `java -jar <the name of the jar file>`
+
+
+
+2) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` on the project's path to get the same result.
    ```
    Project_Folder_Path> docker.sh
    ```
    Wait until all dependencies are up and running.
    
-
-2) To build the jar file for both services (`candlestick-provider` and `candlestick-builder`) run the command bellow on the project's path:
-
-   ```
-   Project_Folder_Path> build.sh
-   ```
-   - Or you can simply run `mvn clean package` in both `candlestick-provider` and `candlestick-builder` folders to create the build in 
-   target folder. From target folder of both services, you can run `java -jar <the name of the jar file>`
 
 
 
