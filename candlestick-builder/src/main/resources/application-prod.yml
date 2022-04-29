@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9001
 
 application:
   partner-url: "ws://localhost:8032"

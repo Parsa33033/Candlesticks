@@ -14,6 +14,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class InstrumentListenerService {
@@ -67,9 +68,10 @@ public class InstrumentListenerService {
             InstrumentDTO previous = instrumentService.getByIsin(isin, CANDLESTICK_STACK_LIMIT);
             previous.setDescription(instrumentDTO.getDescription());
             previous.setType(type);
+            previous.setTimestamp(instrumentDTO.getTimestamp());
             instrumentService.save(previous);
         } else {
-            instrumentDTO.setCandlesticks(new ArrayList<>());
+            instrumentDTO.setCandlesticks(new HashMap<>());
             instrumentService.save(instrumentDTO);
         }
     }

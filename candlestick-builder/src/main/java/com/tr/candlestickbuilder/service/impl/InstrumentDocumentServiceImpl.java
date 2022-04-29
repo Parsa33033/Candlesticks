@@ -12,9 +12,7 @@ import com.tr.candlestickbuilder.service.InstrumentService;
 import com.tr.candlestickbuilder.service.exceptions.InstrumentNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -41,7 +39,6 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
     }
 
     /**
-     *
      * @param isin
      * @param candlesticksLimit 0 for fetching all candlesticks, otherwise fetch a list of size candlestickLimit
      * @return
@@ -51,13 +48,22 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
         Optional<InstrumentDocument> instrumentOptional = this.instrumentDocumentRepository.findById(isin);
         if (instrumentOptional.isPresent()) {
             InstrumentDocument instrument = instrumentOptional.get();
-            List<CandlestickDTO> candlestickDTOS = candlestickDocumentMapper.toDtos(instrument.getCandlesticks());
+            Map<String, CandlestickDTO> candlestickDTOS = candlestickDocumentMapper.toDtoMaps(instrument.getCandlesticks());
             if (candlestickDTOS == null)
-                candlestickDTOS = new ArrayList<>();
+                candlestickDTOS = new HashMap<>();
             if (!candlestickDTOS.isEmpty() &&
                     candlesticksLimit > 0 &&
                     candlesticksLimit < candlestickDTOS.size()) {
-                candlestickDTOS = candlestickDTOS.stream().limit(candlesticksLimit).collect(Collectors.toList());
+                candlestickDTOS = candlestickDTOS.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .limit(candlesticksLimit)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+            } else {
+                candlestickDTOS = candlestickDTOS.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
             }
             InstrumentDTO instrumentDTO = instrumentDocumentMapper.toDto(instrument);
             instrumentDTO.setCandlesticks(candlestickDTOS);
@@ -83,7 +89,7 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
     @Override
     public InstrumentDTO save(InstrumentDTO instrumentDTO) {
         InstrumentDocument instrumentDocument = instrumentDocumentMapper.toEntity(instrumentDTO);
-        List<CandlestickDocument> candlesticks = candlestickDocumentMapper.toEntities(instrumentDTO.getCandlesticks());
+        Map<String, CandlestickDocument> candlesticks = candlestickDocumentMapper.toEntityMaps(instrumentDTO.getCandlesticks());
         instrumentDocument.setCandlesticks(candlesticks);
         instrumentDocument = this.instrumentDocumentRepository.save(instrumentDocument);
         return instrumentDocumentMapper.toDto(instrumentDocument);
@@ -91,7 +97,7 @@ public class InstrumentDocumentServiceImpl implements InstrumentService {
 
     @Override
     public void saveAll(List<InstrumentDTO> instrumentDTOS) {
-        this.instrumentDocumentRepository.saveAll(instrumentDocumentMapper.toEntities(instrumentDTOS));
+        this.instrumentDocumentRepository.saveAll(instrumentDocumentMapper.toEntityLists(instrumentDTOS));
     }
 
     @Override

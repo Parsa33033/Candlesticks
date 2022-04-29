@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Candlestick Controller
@@ -33,7 +34,8 @@ public class CandlesticksController {
     @GetMapping("/candlesticks")
     public List<CandlestickDTO> getCandlesticks(@RequestParam(value = "isin", required = true) String isin)
             throws InstrumentNotFoundException {
-        return instrumentService.getByIsin(isin, LIMIT).getCandlesticks();
+        return instrumentService.getByIsin(isin, LIMIT).getCandlesticks()
+                .values().stream().collect(Collectors.toList());
     }
 
     /**
@@ -44,7 +46,8 @@ public class CandlesticksController {
     @GetMapping("/candlesticks/get-all")
     public List<CandlestickDTO> getAllCandlesticks(@RequestParam(value = "isin", required = true) String isin)
             throws InstrumentNotFoundException {
-        return instrumentService.getByIsin(isin, 0).getCandlesticks();
+        return instrumentService.getByIsin(isin, 0).getCandlesticks()
+                .values().stream().collect(Collectors.toList());
     }
 
 

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Map;
 
 @Document(Constant.INSTRUMENT)
 public class InstrumentDocument extends Instrument {
@@ -13,7 +14,7 @@ public class InstrumentDocument extends Instrument {
     @Id
     private String isin;
 
-    List<CandlestickDocument> candlesticks;
+    Map<String, CandlestickDocument> candlesticks;
 
     public String getIsin() {
         return isin;
@@ -23,11 +24,11 @@ public class InstrumentDocument extends Instrument {
         this.isin = isin;
     }
 
-    public List<CandlestickDocument> getCandlesticks() {
+    public Map<String, CandlestickDocument> getCandlesticks() {
         return candlesticks;
     }
 
-    public void setCandlesticks(List<CandlestickDocument> candlesticks) {
+    public void setCandlesticks(Map<String, CandlestickDocument> candlesticks) {
         this.candlesticks = candlesticks;
     }
 

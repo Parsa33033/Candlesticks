@@ -6,8 +6,6 @@ public class Candlestick {
 
     Instant openTimestamp;
 
-    Instant currentTimestamp;
-
     double openPrice;
 
     double highPrice;
@@ -24,14 +22,6 @@ public class Candlestick {
 
     public void setOpenTimestamp(Instant openTimestamp) {
         this.openTimestamp = openTimestamp;
-    }
-
-    public Instant getCurrentTimestamp() {
-        return currentTimestamp;
-    }
-
-    public void setCurrentTimestamp(Instant currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
     }
 
     public double getOpenPrice() {
@@ -78,7 +68,6 @@ public class Candlestick {
     public String toString() {
         return "Candlestick{" +
                 "openTimestamp=" + openTimestamp +
-                ", currentTimestamp=" + currentTimestamp +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +
                 ", lowPrice=" + lowPrice +

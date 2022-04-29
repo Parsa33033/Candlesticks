@@ -35,4 +35,5 @@ class InstrumentDocumentMapperUnitTest {
         InstrumentDocument c = instrumentDocumentMapper.toEntity(dto);
         assertThat(instrumentDocument.toString()).isEqualTo(c.toString());
     }
+
 }

@@ -8,8 +8,8 @@ import com.tr.candlestickbuilder.service.exceptions.InstrumentTypeException;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Primary
 @Service
@@ -35,8 +35,22 @@ public class InstrumentServiceImpl implements InstrumentService {
         if (hasInstrument(isin)) {
             return this.instrumentHashService.getByIsin(isin, candlesticksLimit);
         } else {
-            InstrumentDTO instrumentDTO = this.instrumentDocumentService.getByIsin(isin, candlesticksLimit);
+            InstrumentDTO instrumentDTO = this.instrumentDocumentService.getByIsin(isin, 0);
             this.instrumentHashService.save(instrumentDTO);
+            if (candlesticksLimit == 0) {
+                instrumentDTO.setCandlesticks(instrumentDTO.getCandlesticks().entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .limit(candlesticksLimit)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new)));
+            } else if (candlesticksLimit > 0) {
+
+                instrumentDTO.setCandlesticks(instrumentDTO.getCandlesticks().entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                        .limit(candlesticksLimit)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new)));
+            }
             return instrumentDTO;
         }
     }

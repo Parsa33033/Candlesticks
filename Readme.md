@@ -7,6 +7,7 @@
    - [Scale](#Scale)
    - [Non_Functional_Requirements](#Non_Functional_Requirements)
    - [Architecture](#Architecture)
+   - [Algorithm](#Algorithm)
 2. [Used_Tech](#Used_Tech)
 3. [Requirements](#Requirements)
 4. [How_to_run](#How_to_run)
@@ -96,6 +97,39 @@ Quotes
 3) Update the temporary cache values as quotes for that specific minute come as a stream
 4) if minute increased, add the temporary candlestick to the list of candlesticks for that specific instrument
 5) create a new temporary Candlestick object for the 'new' minute
+
+
+### Algorithm
+
+```aidl
+// check if instrument exists if not create
+**if** checkInstrumentExists
+   // create a key as quote timestamp truncated to minute (open timestamp)
+   
+   // fetch candlestick if key exists (opentimestamp as key)
+   if (candlesticktTimestampAsKeyExists) {
+       // call quote timestamp as T and quote price as P
+       // if T < opentimestamp update opentimestamp to T
+       
+       // if T > closeTimestamp update closetimestamp to T
+       
+       // if P < minprice update minprice to P
+       
+       // if P > maxprice update maxprice to P
+   } else {
+       /*
+         create a new candle stick and put it in the map of instruments candlesticks with
+           as timestamp truncated to minute
+        */
+   }
+} else {
+   // create a new instrument
+}
+
+```
+
+
+
 
 ## Used_Tech
 

@@ -1,15 +1,10 @@
 package com.tr.candlestickprovider.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.Instant;
 
 public class Candlestick {
 
     Instant openTimestamp;
-
-    Instant currentTimestamp;
 
     double openPrice;
 
@@ -27,14 +22,6 @@ public class Candlestick {
 
     public void setOpenTimestamp(Instant openTimestamp) {
         this.openTimestamp = openTimestamp;
-    }
-
-    public Instant getCurrentTimestamp() {
-        return currentTimestamp;
-    }
-
-    public void setCurrentTimestamp(Instant currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
     }
 
     public double getOpenPrice() {
@@ -81,7 +68,6 @@ public class Candlestick {
     public String toString() {
         return "Candlestick{" +
                 "openTimestamp=" + openTimestamp +
-                ", currentTimestamp=" + currentTimestamp +
                 ", openPrice=" + openPrice +
                 ", highPrice=" + highPrice +
                 ", lowPrice=" + lowPrice +
