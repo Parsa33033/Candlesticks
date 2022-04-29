@@ -3,6 +3,7 @@ package com.tr.candlestickprovider.service.impl;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
 import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -43,29 +44,27 @@ public class InstrumentServiceImpl implements InstrumentService {
 
     @Override
     public List<InstrumentDTO> getAll() {
-        return getAllChoose(null);
-    }
-
-    @Override
-    public List<InstrumentDTO> getAllByType(Type type) {
-        return getAllChoose(type);
-    }
-
-    public List<InstrumentDTO> getAllChoose(Type type) {
         List<InstrumentDTO> instrumentDTOS = this.instrumentHashService.getAll();
         if (instrumentDTOS == null || instrumentDTOS.isEmpty()) {
             instrumentDTOS = this.instrumentDocumentService.getAll();
+            if (instrumentDTOS == null || instrumentDTOS.isEmpty()) instrumentDTOS = new ArrayList<>();
+        }
+        return instrumentDTOS;
+    }
+
+    @Override
+    public List<InstrumentDTO> getAllByType(Type type) throws InstrumentTypeException {
+        if (type == null || !(type == Type.ADD || type == Type.DELETE))
+            throw new InstrumentTypeException(type);
+        List<InstrumentDTO> instrumentDTOS = this.instrumentHashService.getAllByType(type);
+        if (instrumentDTOS == null || instrumentDTOS.isEmpty()) {
+            instrumentDTOS = this.instrumentDocumentService.getAllByType(type);
             if (instrumentDTOS == null || instrumentDTOS.isEmpty()) return new ArrayList<>();
             else {
                 this.instrumentHashService.saveAll(instrumentDTOS);
             }
         }
-        if (type == null)
-            return instrumentDTOS;
-        else
-            return instrumentDTOS.stream()
-                    .filter(instrumentDTO -> instrumentDTO.getType() == type)
-                    .collect(Collectors.toList());
+        return instrumentDTOS;
     }
 
     @Override
@@ -84,5 +83,11 @@ public class InstrumentServiceImpl implements InstrumentService {
     public void deleteByIsin(String isin) {
         this.instrumentDocumentService.deleteByIsin(isin);
         this.instrumentHashService.deleteByIsin(isin);
+    }
+
+    @Override
+    public void deleteAll() {
+        this.instrumentHashService.deleteAll();
+        this.instrumentDocumentService.deleteAll();
     }
 }

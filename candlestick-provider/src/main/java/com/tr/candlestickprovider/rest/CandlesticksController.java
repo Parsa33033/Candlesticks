@@ -3,6 +3,7 @@ package com.tr.candlestickprovider.rest;
 import com.tr.candlestickprovider.model.dto.CandlestickDTO;
 import com.tr.candlestickprovider.service.InstrumentService;
 import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @RestController
 public class CandlesticksController {
-    private final static int LIMIT = 30;
+    public final static int LIMIT = 30;
     private final InstrumentService instrumentService;
 
     public CandlesticksController(InstrumentService instrumentService) {
@@ -29,7 +30,7 @@ public class CandlesticksController {
      * @return
      */
     @GetMapping("/candlesticks")
-    public List<CandlestickDTO> getCandlesticks(@RequestParam("isin") String isin) {
+    public List<CandlestickDTO> getCandlesticks(@RequestParam(value = "isin", required = true) String isin) {
         return instrumentService.getByIsin(isin, LIMIT).getCandlesticks();
     }
 
@@ -39,7 +40,7 @@ public class CandlesticksController {
      * @return
      */
     @GetMapping("/candlesticks/get-all")
-    public List<CandlestickDTO> getAllCandlesticks(@RequestParam("isin") String isin) {
+    public List<CandlestickDTO> getAllCandlesticks(@RequestParam(value = "isin", required = true) String isin) {
         return instrumentService.getByIsin(isin, 0).getCandlesticks();
     }
 

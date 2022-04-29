@@ -3,6 +3,7 @@ package com.tr.candlestickprovider.rest;
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
 import com.tr.candlestickprovider.service.InstrumentService;
+import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 import com.tr.candlestickprovider.service.impl.InstrumentHashServiceImpl;
 import com.tr.candlestickprovider.service.impl.InstrumentServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class InstrumentController {
      * @return
      */
     @GetMapping("/instruments/{isin}")
-    public InstrumentDTO getInstrument(@PathVariable("isin") String isin) {
+    public InstrumentDTO getInstrument(@PathVariable(value = "isin", required = true) String isin) {
         return this.instrumentService.getByIsin(isin, 0);
     }
 
@@ -47,7 +48,7 @@ public class InstrumentController {
      * @return
      */
     @GetMapping("/instruments/get-all-added")
-    public List<InstrumentDTO> getAllAdded() {
+    public List<InstrumentDTO> getAllAdded() throws InstrumentTypeException {
         return this.instrumentService.getAllByType(Type.ADD);
     }
 }

@@ -2,6 +2,7 @@ package com.tr.candlestickprovider.service;
 
 import com.tr.candlestickprovider.model.dto.InstrumentDTO;
 import com.tr.candlestickprovider.model.enums.Type;
+import com.tr.candlestickprovider.service.exceptions.InstrumentTypeException;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface InstrumentService {
 
     List<InstrumentDTO> getAll();
 
-    List<InstrumentDTO> getAllByType(Type type);
+    List<InstrumentDTO> getAllByType(Type type) throws InstrumentTypeException;
 
     InstrumentDTO save(InstrumentDTO instrumentDTO);
 
@@ -21,4 +22,5 @@ public interface InstrumentService {
 
     void deleteByIsin(String isin);
 
+    void deleteAll();
 }

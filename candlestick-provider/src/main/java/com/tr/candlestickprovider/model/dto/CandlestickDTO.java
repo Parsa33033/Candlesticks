@@ -25,6 +25,8 @@ public class CandlestickDTO {
 
     String closeTimestamp;
 
+    public CandlestickDTO() {}
+
     public CandlestickDTO(String isin,
                           String openTimestamp,
                           String currentTimestamp,

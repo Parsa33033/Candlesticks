@@ -91,4 +91,9 @@ public class InstrumentHashServiceImpl implements InstrumentService {
     public void deleteByIsin(String isin) {
         this.instrumentHashRepository.deleteById(isin);
     }
+
+    @Override
+    public void deleteAll() {
+        this.instrumentHashRepository.deleteAll();
+    }
 }
