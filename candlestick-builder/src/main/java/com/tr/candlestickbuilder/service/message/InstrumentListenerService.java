@@ -8,6 +8,7 @@ import com.tr.candlestickbuilder.model.dto.InstrumentEventDTO;;
 import com.tr.candlestickbuilder.model.enums.Type;
 import com.tr.candlestickbuilder.service.InstrumentService;
 import com.tr.candlestickbuilder.service.exceptions.InstrumentNotFoundException;
+import com.tr.candlestickbuilder.service.exceptions.InstrumentReceiveException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -35,34 +36,41 @@ public class InstrumentListenerService {
      * Gets the payload from instrument_queue
      * converts the payload to InstrumentEventDTO
      * saves the Instrument
+     *
      * @param payload
      */
     @RabbitListener(queues = {RabbitConfig.INSTRUMENT_QUEUE})
     public void instrumentListener(String payload) throws InstrumentNotFoundException {
         try {
             InstrumentEventDTO instrumentEventDTO = objectMapper.readValue(payload, InstrumentEventDTO.class);
-            if (!(instrumentEventDTO.getInstrumentDTO() == null || instrumentEventDTO.getType() == null)) {
+            InstrumentDTO instrumentDTO = instrumentEventDTO.getInstrumentDTO();
+            instrumentDTO.setType(instrumentEventDTO.getType());
+            if (instrumentDTO != null && instrumentDTO.getType() != null &&
+                instrumentDTO.getIsin() != null && instrumentDTO.getIsin() != "" &&
+                instrumentDTO.getTimestamp() != null && instrumentDTO.getTimestamp() != "" &&
+                instrumentDTO.getDescription() != null && instrumentDTO.getDescription() != "") {
                 logger.info("InstrumentEvent: ===> {}", instrumentEventDTO);
-                saveInstrument(instrumentEventDTO);
+                saveInstrument(instrumentDTO);
             } else {
-                logger.info("InstrumentEvent was empty!");
+                throw new InstrumentReceiveException(payload, "InstrumentEvent was empty!");
             }
         } catch (InstrumentNotFoundException e) {
             throw e;
-        } catch (JsonProcessingException e) {
-            logger.info("InstrumentEvent failed to convert: {}", e.getMessage());
+        } catch (InstrumentReceiveException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new InstrumentReceiveException(payload, e.getMessage());
         }
-
     }
 
     /**
      * Saves the instrument or updates the description and type
      * based on whether the object is in cache
-     * @param instrumentEventDTO
+     *
+     * @param instrumentDTO
      */
-    public void saveInstrument(InstrumentEventDTO instrumentEventDTO) throws InstrumentNotFoundException {
-        InstrumentDTO instrumentDTO = instrumentEventDTO.getInstrumentDTO();
-        Type type = instrumentEventDTO.getType();
+    public void saveInstrument(InstrumentDTO instrumentDTO) throws InstrumentNotFoundException {
+        Type type = instrumentDTO.getType();
         String isin = instrumentDTO.getIsin();
         if (instrumentService.hasInstrument(isin)) {
             InstrumentDTO previous = instrumentService.getByIsin(isin, CANDLESTICK_STACK_LIMIT);

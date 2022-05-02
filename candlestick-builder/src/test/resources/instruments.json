@@ -1,0 +1,70 @@
+{
+  "instrumentList": [
+    {
+      "instrumentEventDTO": {
+        "type": "ADD",
+        "data": {
+          "isin": "1",
+          "description": "description",
+          "timestamp": "timestamp"
+        }
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {
+        "data": {
+          "isin": "1",
+          "description": "1"
+        }
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {
+        "type": "ADD",
+        "data": {
+        }
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {
+        "type": "ADD",
+        "data": {
+          "description": "1"
+        }
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {
+        "type": "ADD",
+        "data": {
+          "isin": "1"
+        }
+      },
+      "result": "OK"
+    },
+    {
+      "instrumentEventDTO": {
+        "type": "ADD",
+        "data": {
+          "isin": "",
+          "description": ""
+        }
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {
+        "type": "ADD"
+      },
+      "result": "INSTRUMENT_EXCEPTION"
+    },
+    {
+      "instrumentEventDTO": {},
+      "result": "INSTRUMENT_EXCEPTION"
+    }
+  ]
+}

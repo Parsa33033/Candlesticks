@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -26,17 +27,13 @@ public class QuoteListenerService {
 
     Logger logger = LoggerFactory.getLogger(QuoteListenerService.class);
 
-    private final CandlestickService candlestickService;
-
     private final InstrumentService instrumentService;
 
     private final ObjectMapper objectMapper;
 
     public QuoteListenerService(ObjectMapper objectMapper,
-                                CandlestickService candlestickService,
                                 InstrumentService instrumentService) {
         this.objectMapper = objectMapper;
-        this.candlestickService = candlestickService;
         this.instrumentService = instrumentService;
     }
 
@@ -56,7 +53,8 @@ public class QuoteListenerService {
         updateCandleStick(quoteDTO);
     }
 
-    public void updateCandleStick(QuoteDTO quoteDTO) {
+    @Transactional
+    synchronized public void updateCandleStick(QuoteDTO quoteDTO) {
         try {
             String isin = quoteDTO.getIsin();
             // check if instrument exists if not create
