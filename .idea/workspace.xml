@@ -1,7 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69a05162-14b0-49ce-853e-30869c008f57" name="Default Changelist" comment="" />
+    <list default="true" id="69a05162-14b0-49ce-853e-30869c008f57" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/application-prod.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/application-test.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/CandlestickBuilderApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/config/ApplicationConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/config/MongoDBConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/config/RabbitConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/config/RedisConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/consts/Constant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/consts/RabbitRouteBuilder$Destination.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/consts/RabbitRouteBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/Candlestick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/Instrument.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/dto/CandlestickDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/dto/InstrumentDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/dto/InstrumentEventDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/dto/QuoteDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/dto/QuoteEventDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/enums/Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/CandlestickDocumentMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/CandlestickDocumentMapperImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/CandlestickHashMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/CandlestickHashMapperImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/EntityMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/InstrumentDocumentMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/InstrumentDocumentMapperImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/InstrumentHashMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mapper/InstrumentHashMapperImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mongodb/CandlestickDocument.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/mongodb/InstrumentDocument.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/redis/CandlestickHash.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/model/redis/InstrumentHash.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/repository/CandlestickDocumentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/repository/CandlestickHashRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/repository/InstrumentDocumentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/repository/InstrumentHashRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/CandlestickService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/InstrumentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/CandlesticksNullException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/InstrumentEventNotSupportedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/InstrumentNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/InstrumentReceiveException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/InstrumentTypeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/PartnerEventReceiveException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/PartnerEventSendToQueueException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/QuoteEventNotSupportedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/QuoteReceiveException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/UpdateCandlestickException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/exceptions/WebSocketNotConnectedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/impl/InstrumentDocumentServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/impl/InstrumentHashServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/impl/InstrumentServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/message/InstrumentListenerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/classes/com/tr/candlestickbuilder/service/message/QuoteListenerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickDocumentMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickHashMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentDocumentMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentHashMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/config/RabbitMockProvider.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/mapper/CandlestickDocumentMapperUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/mapper/CandlestickHashMapperUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/mapper/InstrumentDocumentMapperUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/mapper/InstrumentHashMapperUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/model/InstrumentTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/model/InstrumentTestList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/model/QuoteTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/model/QuoteTestList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/model/enums/ResultType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/repository/CandlestickDocumentRepositoryIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/repository/CandlestickHashRepositoryIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/repository/InstrumentDocumentRepositoryIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/repository/InstrumentHashRepositoryIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/service/impl/InstrumentDocumentServiceImplIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/service/impl/InstrumentHashServiceImplIntegrationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/service/impl/InstrumentServiceImplUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/service/message/InstrumentListenerServiceUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/com/tr/candlestickbuilder/service/message/QuoteListenerServiceUnitTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/instruments.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/target/test-classes/quotes.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +103,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/candlestick-provider" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
   </component>
