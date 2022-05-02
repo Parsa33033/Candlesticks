@@ -183,7 +183,7 @@ For running the API, the steps below must be followed:
      target folder. From target folder of both services, you can run `java -jar <the name of the jar file>`
 
 
-**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked. Also port number 6379 shoule be open for testing.**
+**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked. Also port number 6379 should be open for testing.**
 
 
 **Note: Wait until build is finished.**
