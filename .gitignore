@@ -2,5 +2,5 @@ logs.*
 .idea
 .idea/workspace.xml
 .idea*.*
-**/target/
-**/.idea/
+**/target/**
+**/.idea/**
