@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d346fa62-309f-424c-a52b-1f920a7a4583" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickDocumentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickDocumentMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickHashMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/CandlestickHashMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentDocumentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentDocumentMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentHashMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/tr/candlestickbuilder/model/mapper/InstrumentHashMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../candlestick-provider/logs.log.2022-04-26.0.gz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +185,7 @@
       <workItem from="1651429165078" duration="7068000" />
       <workItem from="1651470594727" duration="20717000" />
       <workItem from="1651512533054" duration="43000" />
-      <workItem from="1651512597931" duration="320000" />
+      <workItem from="1651512597931" duration="903000" />
     </task>
     <servers />
   </component>
