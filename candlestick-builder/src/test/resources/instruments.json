@@ -65,7 +65,7 @@
     },
     {
       "instrumentEventDTO": {},
-      "result": "INSTRUMENT_NOT_FOUND"
+      "result": "INSTRUMENT_EXCEPTION"
     }
   ]
 }

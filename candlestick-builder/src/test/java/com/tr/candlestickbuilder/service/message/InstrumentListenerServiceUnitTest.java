@@ -69,8 +69,8 @@ class InstrumentListenerServiceUnitTest {
             String payload = objectMapper.writeValueAsString(instrumentEventDTO);
             if (resultType == ResultType.INSTRUMENT_EXCEPTION) {
                 assertThrows(InstrumentReceiveException.class, () -> instrumentListenerService.instrumentListener(payload));
-            } else if (resultType == ResultType.INSTRUMENT_NOT_FOUND) {
-
+            } else if (resultType == ResultType.INSTRUMENT_EXCEPTION) {
+                assertThrows(InstrumentReceiveException.class, () -> instrumentListenerService.instrumentListener(payload));
             } else {
                 assertDoesNotThrow(() -> instrumentListenerService.instrumentListener(payload));
             }
