@@ -5,11 +5,12 @@
         "type": "ADD",
         "data": {
           "isin": "1",
+          "type": "ADD",
           "description": "description",
           "timestamp": "timestamp"
         }
       },
-      "result": "INSTRUMENT_EXCEPTION"
+      "result": "OK"
     },
     {
       "instrumentEventDTO": {
@@ -44,7 +45,7 @@
           "isin": "1"
         }
       },
-      "result": "OK"
+      "result": "INSTRUMENT_EXCEPTION"
     },
     {
       "instrumentEventDTO": {
@@ -64,7 +65,7 @@
     },
     {
       "instrumentEventDTO": {},
-      "result": "INSTRUMENT_EXCEPTION"
+      "result": "INSTRUMENT_NOT_FOUND"
     }
   ]
 }

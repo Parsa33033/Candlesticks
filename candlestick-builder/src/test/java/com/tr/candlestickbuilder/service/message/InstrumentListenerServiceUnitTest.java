@@ -13,6 +13,7 @@ import com.tr.candlestickbuilder.service.exceptions.InstrumentReceiveException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ class InstrumentListenerServiceUnitTest {
     Logger logger = LoggerFactory.getLogger(InstrumentListenerServiceUnitTest.class);
     String isin = "isin";
 
-    @Mock
+    @InjectMocks
     InstrumentListenerService instrumentListenerService;
 
     @Autowired
@@ -52,7 +53,8 @@ class InstrumentListenerServiceUnitTest {
     public void setUp() throws IOException {
         objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        instrumentListenerService = Mockito.mock(InstrumentListenerService.class);
+        InstrumentService instrumentServiceMock = Mockito.mock(InstrumentService.class);
+        instrumentListenerService = new InstrumentListenerService(objectMapper, instrumentServiceMock);
 
         Resource instruments = resourceLoader.getResource("classpath:instruments.json");
         URL url = instruments.getURL();
@@ -66,9 +68,9 @@ class InstrumentListenerServiceUnitTest {
             ResultType resultType = test.getResult();
             String payload = objectMapper.writeValueAsString(instrumentEventDTO);
             if (resultType == ResultType.INSTRUMENT_EXCEPTION) {
-                Mockito.doThrow(InstrumentReceiveException.class)
-                        .when(instrumentListenerService).instrumentListener(payload);
                 assertThrows(InstrumentReceiveException.class, () -> instrumentListenerService.instrumentListener(payload));
+            } else if (resultType == ResultType.INSTRUMENT_NOT_FOUND) {
+
             } else {
                 assertDoesNotThrow(() -> instrumentListenerService.instrumentListener(payload));
             }
