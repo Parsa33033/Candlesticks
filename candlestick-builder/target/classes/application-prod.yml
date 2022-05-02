@@ -1,0 +1,33 @@
+server:
+  port: 9001
+
+application:
+  partner-url: "ws://localhost:8032"
+
+spring:
+  application:
+    name: tr_candlesticks
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
+  redis:
+    host: localhost
+    port: 6379
+  data:
+    mongodb:
+      host: localhost
+      username: admin
+      password: password
+      database: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  file:
+    path: ./logs
+    name: logs.log
+  level:
+    com.tr.candlestickbuilder: info
+
