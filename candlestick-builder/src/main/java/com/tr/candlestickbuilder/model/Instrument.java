@@ -8,6 +8,8 @@ public class Instrument {
 
     private Type type;
 
+    private String timestamp;
+
     public String getDescription() {
         return description;
     }
@@ -24,11 +26,20 @@ public class Instrument {
         this.type = type;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return "Instrument{" +
                 "description='" + description + '\'' +
                 ", type=" + type +
+                ", timestamp='" + timestamp + '\'' +
                 '}';
     }
 }

@@ -7,16 +7,17 @@ import com.tr.candlestickbuilder.model.dto.CandlestickDTO;
 import com.tr.candlestickbuilder.model.dto.InstrumentDTO;
 import com.tr.candlestickbuilder.model.dto.QuoteDTO;
 import com.tr.candlestickbuilder.model.enums.Type;
-import com.tr.candlestickbuilder.service.CandlestickService;
 import com.tr.candlestickbuilder.service.InstrumentService;
 import com.tr.candlestickbuilder.service.exceptions.CandlesticksNullException;
-import com.tr.candlestickbuilder.service.exceptions.QuoteNotHandledWhenReceivedException;
+import com.tr.candlestickbuilder.service.exceptions.QuoteReceiveException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -26,17 +27,13 @@ public class QuoteListenerService {
 
     Logger logger = LoggerFactory.getLogger(QuoteListenerService.class);
 
-    private final CandlestickService candlestickService;
-
     private final InstrumentService instrumentService;
 
     private final ObjectMapper objectMapper;
 
     public QuoteListenerService(ObjectMapper objectMapper,
-                                CandlestickService candlestickService,
                                 InstrumentService instrumentService) {
         this.objectMapper = objectMapper;
-        this.candlestickService = candlestickService;
         this.instrumentService = instrumentService;
     }
 
@@ -56,9 +53,15 @@ public class QuoteListenerService {
         updateCandleStick(quoteDTO);
     }
 
-    public void updateCandleStick(QuoteDTO quoteDTO) {
+    @Transactional
+    synchronized public void updateCandleStick(QuoteDTO quoteDTO) {
         try {
             String isin = quoteDTO.getIsin();
+            if (!(isin != null && isin != "" &&
+                    quoteDTO.getPrice() > 0 && quoteDTO.getTimestamp() != null &&
+                    quoteDTO.getTimestamp() != ""))
+                throw new QuoteReceiveException(quoteDTO.toString(), "Quote fields are incorrect!");
+
             // check if instrument exists if not create
             if (instrumentService.hasInstrument(isin)) {
                 // create a key as quote timestamp truncated to minute (open timestamp)
@@ -122,10 +125,12 @@ public class QuoteListenerService {
                 newInstrumentDTO.setCandlesticks(new HashMap<>());
                 instrumentService.save(newInstrumentDTO);
             }
+        } catch (DateTimeParseException e) {
+            throw new QuoteReceiveException(quoteDTO.toString(), "Timestamp could not be converted!");
         } catch (CandlesticksNullException e) {
             throw new CandlesticksNullException();
         } catch (Exception e) {
-            throw new QuoteNotHandledWhenReceivedException(quoteDTO.toString(), e.getMessage());
+            throw new QuoteReceiveException(quoteDTO.toString(), e.getMessage());
         }
     }
 

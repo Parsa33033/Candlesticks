@@ -2,7 +2,129 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a05162-14b0-49ce-853e-30869c008f57" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_github_fridujo_rabbitmq_mock_1_0_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_google_guava_guava_21_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_rabbitmq_amqp_client_5_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_rabbitmq_http_client_3_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__de_flapdoodle_de_flapdoodle_os_1_1_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__de_flapdoodle_embed_de_flapdoodle_embed_mongo_3_4_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__de_flapdoodle_embed_de_flapdoodle_embed_mongo_packageresolver_1_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__de_flapdoodle_embed_de_flapdoodle_embed_process_3_1_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_lettuce_lettuce_core_6_1_8_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_buffer_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_codec_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_common_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_handler_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_resolver_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_netty_netty_transport_4_1_76_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__io_projectreactor_reactor_core_3_4_17.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__it_ozimov_embedded_redis_0_7_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_11_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_11_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_java_dev_jna_jna_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_java_dev_jna_jna_platform_5_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__net_minidev_json_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_commons_commons_compress_1_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_62.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_62.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_62.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_assertj_assertj_core_3_21_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_codehaus_groovy_groovy_3_0_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_codehaus_groovy_groovy_json_3_0_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_hamcrest_hamcrest_library_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mapstruct_mapstruct_1_4_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_4_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mockito_mockito_core_4_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mongodb_bson_4_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_4_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_mongodb_mongodb_driver_sync_4_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_ow2_asm_asm_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_amqp_spring_amqp_2_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_amqp_spring_rabbit_2_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_amqp_spring_rabbit_junit_2_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_amqp_spring_rabbit_test_2_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_amqp_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_6_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_6_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_6_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_data_spring_data_mongodb_3_3_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_6_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_retry_spring_retry_1_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_aop_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_beans_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_context_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_context_support_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_core_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_expression_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_messaging_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_oxm_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_test_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_tx_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_web_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_springframework_spring_websocket_5_3_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_8_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/libraries/Maven__org_yaml_snakeyaml_1_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlestick-builder/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +145,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/candlestick-provider" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
   </component>
@@ -127,6 +249,8 @@
       <workItem from="1651221050269" duration="62000" />
       <workItem from="1651221126937" duration="52000" />
       <workItem from="1651221518726" duration="10848000" />
+      <workItem from="1651511216556" duration="1342000" />
+      <workItem from="1651512606379" duration="1220000" />
     </task>
     <servers />
   </component>
