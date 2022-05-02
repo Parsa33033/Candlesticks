@@ -156,7 +156,7 @@ The tech used for this API are:
 5) RabbitMQ
 6) Hibernate
 
-**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked** 
+ 
 
 ## Requirements
 
@@ -182,7 +182,12 @@ For running the API, the steps below must be followed:
    - Or you can simply run `mvn clean package` in both `candlestick-provider` and `candlestick-builder` folders to create the build in
      target folder. From target folder of both services, you can run `java -jar <the name of the jar file>`
 
-**wait until build is finished**
+
+**Note: While building the app (or Testing), Redis needs sufficient disk space to be mocked**
+
+
+**Note: Wait until build is finished**
+
 
 2) Run `docker.sh` to start the docker-compose.yml services or use `docker-compose up` on the project's path to get the same result.
    ```
@@ -191,7 +196,7 @@ For running the API, the steps below must be followed:
    Wait until all dependencies are up and running.
    
 
-**wait until all docker containers are up**
+**Note: Wait until all docker containers are up**
 
 
 3) After the build is finished, run `run-candlestick-provider.sh` to start the candlestick-provider service
