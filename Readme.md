@@ -46,7 +46,7 @@ N = 100000, H = 100 => 600000000/day => 219G candlesticks/year
 
 ### Non_Functional_Requirements
 1) Reliability
-   - A system is not really needed to be reliable in terms of being 100 percent accurate about there might be distortion in the data received from 
+   - The system is not really needed to be reliable in terms of being 100 percent accurate since there might be distortion in the data received from 
    the partner API
 2) Performance
    - Since the document are mostly fetched and saved and no intricate query is needed, a NoSQL database would be a good choice
